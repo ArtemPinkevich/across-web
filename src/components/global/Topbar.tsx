@@ -12,24 +12,46 @@ const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const isDarkTheme = theme.palette.mode === "dark";
+
+  const topbarStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    p: 2,
+  };
+
+  const searchBarStyle = {
+    display: "flex",
+    borderRadius: "3px",
+    backgroundColor: colors.primary[400],
+  };
+
+  const searchButtonStyle = {
+    p: 1,
+  };
+
+  const searchInputStyle = {
+    ml: 2,
+    flex: 1,
+  };
+
+  const iconsStyle = {
+    display: "flex",
+  };
 
   return (
-    <Box display="flex" justifyContent="space-between" p={2}>
+    <Box sx={topbarStyle}>
       {/* SEARCH BAR */}
-      <Box display="flex" borderRadius="3px" sx={{backgroundColor: colors.primary[400]}}>
-        <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-        <IconButton type="button" sx={{ p: 1 }}>
+      <Box sx={searchBarStyle}>
+        <InputBase sx={searchInputStyle} placeholder="Search" />
+        <IconButton type="button" sx={searchButtonStyle}>
           <SearchIcon />
         </IconButton>
       </Box>
       {/* ICONS */}
-      <Box display="flex">
+      <Box sx={iconsStyle}>
         <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon />
-          ) : (
-            <LightModeOutlinedIcon />
-          )}
+          {isDarkTheme ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
         </IconButton>
         <IconButton>
           <NotificationsOutlinedIcon />
