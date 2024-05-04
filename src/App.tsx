@@ -1,15 +1,13 @@
 import Topbar from "./scenes/global/Topbar";
 import { ColorModeContext, useMode } from "./theme";
-import { CssBaseline, Theme, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 
 const App = () => {
-  const [theme, colorMode] = useMode();
+  const { theme, colorMode } = useMode();
 
   return (
-    <ColorModeContext.Provider
-      value={colorMode as { toggleColorMode: () => void }}
-    >
-      <ThemeProvider theme={theme as Theme}>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
           <main className="content">
