@@ -1,9 +1,11 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../../theme";
+import { Box, Typography } from "@mui/material";
+import { tokens } from "../../../theme/theme";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../store/store";
 
 const SidebarProfileInfo = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const settings = useSelector((state: IRootState) => state.settings);
+  const colors = tokens(settings.mode);
 
   const sidebarProfileInfoBoxStyle = {
     mb: "25px",
@@ -29,7 +31,7 @@ const SidebarProfileInfo = () => {
   };
 
   const jobTytleStyle = {
-    color: colors.greenAccent[500],
+    color: colors.greenAccent[300],
   };
 
   return (

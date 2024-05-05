@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { Button, Typography, useTheme } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { MenuItem } from "react-pro-sidebar";
-import { tokens } from "../../../theme";
+import { tokens } from "../../../theme/theme";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../store/store";
 
 export type SidebarMenuItemParams = {
   title: string;
@@ -10,8 +12,8 @@ export type SidebarMenuItemParams = {
 };
 
 const SidebarMenuItem = ({ title, to, icon }: SidebarMenuItemParams) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const settings = useSelector((state: IRootState) => state.settings);
+  const colors = tokens(settings.mode);
 
   const menuItemStyle = {
     color: colors.grey[100],

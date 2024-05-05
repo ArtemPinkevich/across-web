@@ -1,18 +1,39 @@
-import { Box, IconButton, InputBase, useTheme } from "@mui/material";
-import { useContext } from "react";
-import { ColorModeContext, tokens } from "../../theme";
+import { Box, IconButton, InputBase, PaletteMode } from "@mui/material";
+import { tokens } from "../../theme/theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import { useDispatch, useSelector } from "react-redux";
+import { setSettings } from "../../reducers/settingsReducer";
+import { IRootState } from "../../store/store";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Topbar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const colorMode = useContext(ColorModeContext);
-  const isDarkTheme = theme.palette.mode === "dark";
+  const dispatch = useDispatch();
+  const settings = useSelector((state: IRootState) => state.settings);
+  const intl = useIntl();
+  const colors = tokens(settings.mode);
+  const isDarkTheme = settings.mode === "dark";
+  const isRussian = settings.localization === "ru";
+
+  const handleOnChangeMode = (mode: PaletteMode) => {
+    dispatch(
+      setSettings({
+        ...settings,
+        mode: mode,
+      }),
+    );
+  };
+
+  const handleOnChangeLang = (lang: string) => {
+    dispatch(
+      setSettings({
+        ...settings,
+        localization: lang,
+      }),
+    );
+  };
 
   const topbarStyle = {
     display: "flex",
@@ -43,21 +64,23 @@ const Topbar = () => {
     <Box sx={topbarStyle}>
       {/* SEARCH BAR */}
       <Box sx={searchBarStyle}>
-        <InputBase sx={searchInputStyle} placeholder="Search" />
+        <InputBase
+          sx={searchInputStyle}
+          placeholder={intl.formatMessage({ id: "search" })}
+        />
         <IconButton type="button" sx={searchButtonStyle}>
           <SearchIcon />
         </IconButton>
       </Box>
       {/* ICONS */}
       <Box sx={iconsStyle}>
-        <IconButton onClick={colorMode.toggleColorMode}>
+        <IconButton
+          onClick={() => handleOnChangeMode(isDarkTheme ? "light" : "dark")}
+        >
           {isDarkTheme ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
         </IconButton>
-        <IconButton>
-          <NotificationsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <SettingsOutlinedIcon />
+        <IconButton onClick={() => handleOnChangeLang(isRussian ? "en" : "ru")}>
+          <FormattedMessage id="lang" />
         </IconButton>
         <IconButton>
           <PersonOutlinedIcon />

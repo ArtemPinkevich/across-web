@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { Sidebar as ProSidebar, Menu } from "react-pro-sidebar";
-import { Box, useTheme } from "@mui/material";
-import { tokens } from "../../../theme";
+import { Box } from "@mui/material";
+import { tokens } from "../../../theme/theme";
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarLogoAndMenuIcon from "./SidebarLogoAndMenuIcon";
 import SidebarProfileInfo from "./SidebarProfileInfo";
 import sidebarMenuItemParams from "./SidebarMenuItemParams";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../store/store";
+import { useIntl } from "react-intl";
 
 const Sidebar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const isDarkTheme = theme.palette.mode === "dark";
+  const settings = useSelector((state: IRootState) => state.settings);
+  const intl = useIntl();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const colors = tokens(settings.mode);
+  const isDarkTheme = settings.mode === "dark";
 
   const rootStyle = {
     [`.css-dip3t8`]: {
@@ -40,8 +44,8 @@ const Sidebar = () => {
         <Box paddingLeft={isCollapsed ? undefined : "10%"}>
           {sidebarMenuItemParams.map((params) => (
             <SidebarMenuItem
-              key={params.title}
-              title={params.title}
+              key={intl.formatMessage({ id: `${params.title}` })}
+              title={intl.formatMessage({ id: `${params.title}` })}
               to={params.to}
               icon={params.icon}
             />

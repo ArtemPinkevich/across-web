@@ -1,4 +1,6 @@
-import { createContext, useState, useMemo } from "react";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { IRootState } from "../store/store";
 import { createTheme } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
 
@@ -194,22 +196,8 @@ export const themeSettings = (mode: PaletteMode) => {
   };
 };
 
-// context for color mode
-export const ColorModeContext = createContext({
-  toggleColorMode: () => {},
-});
-
 export const useMode = () => {
-  const [mode, setMode] = useState<PaletteMode>("dark");
-
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () =>
-        setMode((prev) => (prev === "light" ? "dark" : "light")),
-    }),
-    [],
-  );
-
+  const mode = useSelector((state: IRootState) => state.settings.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-  return { theme, colorMode };
+  return theme;
 };

@@ -1,7 +1,10 @@
 import { MenuItem } from "react-pro-sidebar";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../../theme";
+import { Box, IconButton, Typography } from "@mui/material";
+import { tokens } from "../../../theme/theme";
+import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../store/store";
 
 type SidebarLogoAndMenuIconProps = {
   isCollapsed: boolean;
@@ -12,8 +15,8 @@ const SidebarLogoAndMenuIcon = ({
   isCollapsed,
   setIsCollapsed,
 }: SidebarLogoAndMenuIconProps) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const settings = useSelector((state: IRootState) => state.settings);
+  const colors = tokens(settings.mode);
 
   const menuItemStyle = {
     margin: "10px 0 20px 0",
@@ -40,7 +43,7 @@ const SidebarLogoAndMenuIcon = ({
       {!isCollapsed && (
         <Box sx={boxStyle}>
           <Typography variant="h3" sx={typographyStyle}>
-            JURIST
+            <FormattedMessage id="jurist" />
           </Typography>
           <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
             <MenuOutlinedIcon />
