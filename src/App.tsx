@@ -1,14 +1,12 @@
 import { useMode } from "./theme/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 import { useSelector } from "react-redux";
 import { messages } from "./localization/localization";
 import { IRootState } from "./store/store";
 import Topbar from "./components/global/Topbar";
 import Sidebar from "./components/global/sidebar/Sidebar";
-import Shippers from "./components/reports/Shippers";
-import Drivers from "./components/reports/Drivers";
+import JuristRoutes from "./components/global/routes/JuristRoutes";
 
 const App = () => {
   const lang = useSelector((state: IRootState) => state.settings.localization);
@@ -22,11 +20,7 @@ const App = () => {
           <Sidebar />
           <main className="content">
             <Topbar />
-            <Routes>
-              <Route path="/" element={<Shippers />} />
-              <Route path="/shippers" element={<Shippers />} />
-              <Route path="/drivers" element={<Drivers />} />
-            </Routes>
+            <JuristRoutes />
           </main>
         </div>
       </ThemeProvider>

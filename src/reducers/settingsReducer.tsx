@@ -13,8 +13,8 @@ const defaultState: SettingsProps = {
   isSidebarCollapsed: false,
 };
 
-const getInitialState = (defaultState: SettingsProps): SettingsProps => {  
-  const value = localStorage.getItem("webLocalSettings");  
+const getInitialState = (defaultState: SettingsProps): SettingsProps => {
+  const value = localStorage.getItem("webLocalSettings");
   return (value === null ? defaultState : JSON.parse(value)) || defaultState;
 };
 
