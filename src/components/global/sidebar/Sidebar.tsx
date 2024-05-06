@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Sidebar as ProSidebar, Menu } from "react-pro-sidebar";
 import { Box } from "@mui/material";
 import { tokens } from "../../../theme/theme";
@@ -6,16 +5,26 @@ import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarLogoAndMenuIcon from "./SidebarLogoAndMenuIcon";
 import SidebarProfileInfo from "./SidebarProfileInfo";
 import sidebarMenuItemParams from "./SidebarMenuItemParams";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSettings } from "../../../reducers/settingsReducer";
 import { IRootState } from "../../../store/store";
 import { useIntl } from "react-intl";
 
 const Sidebar = () => {
   const settings = useSelector((state: IRootState) => state.settings);
+  const dispatch = useDispatch();
   const intl = useIntl();
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const colors = tokens(settings.mode);
   const isDarkTheme = settings.mode === "dark";
+
+  const setIsCollapsed = () => {
+    dispatch(
+      setSettings({
+        ...settings,
+        isSidebarCollapsed: !settings.isSidebarCollapsed,
+      }),
+    );
+  };
 
   const rootStyle = {
     [`.css-dip3t8`]: {
@@ -32,16 +41,16 @@ const Sidebar = () => {
   };
 
   return (
-    <ProSidebar rootStyles={rootStyle} collapsed={isCollapsed}>
+    <ProSidebar rootStyles={rootStyle} collapsed={settings.isSidebarCollapsed}>
       <Menu menuItemStyles={menuItemStyles}>
         <SidebarLogoAndMenuIcon
-          isCollapsed={isCollapsed}
+          isCollapsed={settings.isSidebarCollapsed}
           setIsCollapsed={setIsCollapsed}
         />
 
-        {!isCollapsed && <SidebarProfileInfo />}
+        {!settings.isSidebarCollapsed && <SidebarProfileInfo />}
 
-        <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+        <Box paddingLeft={settings.isSidebarCollapsed ? undefined : "10%"}>
           {sidebarMenuItemParams.map((params) => (
             <SidebarMenuItem
               key={intl.formatMessage({ id: `${params.title}` })}

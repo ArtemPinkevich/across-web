@@ -4,18 +4,26 @@ import { PaletteMode } from "@mui/material";
 type SettingsProps = {
   mode: PaletteMode;
   localization: string;
+  isSidebarCollapsed: boolean;
 };
 
-const initialState: SettingsProps = {
+const defaultState: SettingsProps = {
   mode: "dark",
   localization: "ru",
+  isSidebarCollapsed: false,
+};
+
+const getInitialState = (defaultState: SettingsProps): SettingsProps => {  
+  const value = localStorage.getItem("webLocalSettings");  
+  return (value === null ? defaultState : JSON.parse(value)) || defaultState;
 };
 
 const settingsSlice = createSlice({
   name: "settings",
-  initialState: initialState,
+  initialState: getInitialState(defaultState),
   reducers: {
     setSettings(_, action) {
+      localStorage.setItem("webLocalSettings", JSON.stringify(action.payload));
       return action.payload;
     },
   },
