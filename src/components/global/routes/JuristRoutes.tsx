@@ -1,7 +1,7 @@
 import { Routes, Route, useMatch } from "react-router-dom";
 import Shippers from "../../reports/Shippers";
 import Drivers from "../../reports/Drivers";
-import Profile from "../Profile";
+import Profile from "../profile/Profile";
 import User, { UserProps } from "../../reports/User";
 
 const JuristRoutes = () => {

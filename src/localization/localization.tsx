@@ -5,6 +5,7 @@ export const messages: Record<string, Record<string, string>> = {
     drivers: "Drivers",
     profile: "Profile",
     search: "Search",
+    showAll: "Show all",
     lang: "Ru",
   },
   ru: {
@@ -13,6 +14,7 @@ export const messages: Record<string, Record<string, string>> = {
     drivers: "Водители",
     profile: "Профиль",
     search: "Поиск",
+    showAll: "Показать все",
     lang: "En",
   },
 };
