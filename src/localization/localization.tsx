@@ -9,7 +9,7 @@ export const messages: Record<string, Record<string, string>> = {
     lang: "Ru",
   },
   ru: {
-    jurist: "Юрист",
+    jurist: "ЮРИСТ",
     shippers: "Грузоотправители",
     drivers: "Водители",
     profile: "Профиль",

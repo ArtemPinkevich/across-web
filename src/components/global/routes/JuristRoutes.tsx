@@ -2,30 +2,28 @@ import { Routes, Route, useMatch } from "react-router-dom";
 import Shippers from "../../reports/Shippers";
 import Drivers from "../../reports/Drivers";
 import Profile from "../profile/Profile";
-import User, { UserProps } from "../../reports/User";
+import Person, { PersonProps } from "../../reports/Person";
+import personService from "../../../services/persons";
+import { useState, useEffect } from "react";
 
 const JuristRoutes = () => {
   const shippersMatch = useMatch("/shippers/:id");
   const driversMatch = useMatch("/drivers/:id");
+  const [persons, setPersons] = useState<PersonProps[]>([]);
 
-  const id: string = "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bc";
-  const users: UserProps[] = [
-    {
-      id: id,
-      name: "Roman",
-      surname: "Permyakov",
-      patronymic: "Jurievich",
-      birthDate: "02.12.1984",
-      phoneNumber: "+72222222222",
-      email: "permyakov@permyakov.ru",
-    },
-  ];
+  useEffect(() => {
+    const getPersons = async () => {
+      const p: PersonProps[] = await personService.getAll();
+      setPersons(p);
+    };
+    getPersons();
+  }, []);
 
   const shipper = shippersMatch
-    ? users.find((user) => user.id === shippersMatch.params.id)
+    ? persons.find((person) => person.id === shippersMatch.params.id)
     : null;
   const driver = driversMatch
-    ? users.find((user) => user.id === driversMatch.params.id)
+    ? persons.find((person) => person.id === driversMatch.params.id)
     : null;
 
   return (
@@ -34,8 +32,8 @@ const JuristRoutes = () => {
       <Route path="/shippers" element={<Shippers />} />
       <Route path="/drivers" element={<Drivers />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/shippers/:id" element={<User user={shipper} />} />
-      <Route path="/drivers/:id" element={<User user={driver} />} />
+      <Route path="/shippers/:id" element={<Person person={shipper} />} />
+      <Route path="/drivers/:id" element={<Person person={driver} />} />
     </Routes>
   );
 };

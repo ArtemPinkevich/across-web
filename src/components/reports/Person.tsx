@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Header from "../global/Header";
 
-export type UserProps = {
+export type PersonProps = {
   id: string;
   name: string;
   surname: string;
@@ -9,16 +9,18 @@ export type UserProps = {
   birthDate: string;
   phoneNumber: string;
   email: string;
+  role: string;
+  isConfirmed: boolean;
 };
 
-const User = ({ user }: { user: UserProps | null | undefined }) => {
+const Person = ({ person }: { person: PersonProps | null | undefined }) => {
   return (
     <Box m="20px">
       <Header
-        title={`${user?.surname ?? ""} ${user?.name ?? ""} ${user?.patronymic ?? ""}`.toUpperCase()}
+        title={`${person?.surname ?? ""} ${person?.name ?? ""} ${person?.patronymic ?? ""}`.toUpperCase()}
       />
     </Box>
   );
 };
 
-export default User;
+export default Person;

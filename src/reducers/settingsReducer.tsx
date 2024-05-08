@@ -5,12 +5,14 @@ type SettingsProps = {
   mode: PaletteMode;
   localization: string;
   isSidebarCollapsed: boolean;
+  filter: string;
 };
 
 const defaultState: SettingsProps = {
   mode: "dark",
   localization: "ru",
   isSidebarCollapsed: false,
+  filter: "",
 };
 
 const getInitialState = (defaultState: SettingsProps): SettingsProps => {

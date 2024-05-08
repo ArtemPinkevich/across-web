@@ -1,0 +1,70 @@
+{
+  "persons": [
+    {
+      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bc",
+      "name": "Roman",
+      "surname": "Permyakov",
+      "patronymic": "Jurievich",
+      "birthDate": "02.12.1984",
+      "phoneNumber": "+72222222222",
+      "email": "permyakov@permyakov.ru",
+      "role": "Driver",
+      "isConfirmed": false
+    },
+    {
+      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bb",
+      "name": "Roman",
+      "surname": "Permyakov",
+      "patronymic": "Jurievich",
+      "birthDate": "02.12.1984",
+      "phoneNumber": "+72222222222",
+      "email": "permyakov@permyakov.ru",
+      "role": "Driver",
+      "isConfirmed": false
+    },
+    {
+      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bd",
+      "name": "Roman",
+      "surname": "Permyakov",
+      "patronymic": "Jurievich",
+      "birthDate": "02.12.1984",
+      "phoneNumber": "+72222222222",
+      "email": "permyakov@permyakov.ru",
+      "role": "Driver",
+      "isConfirmed": true
+    },
+    {
+      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3be",
+      "name": "Roman",
+      "surname": "Permyakov",
+      "patronymic": "Jurievich",
+      "birthDate": "02.12.1984",
+      "phoneNumber": "+72222222222",
+      "email": "permyakov@permyakov.ru",
+      "role": "Shipper",
+      "isConfirmed": false
+    },
+    {
+      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bf",
+      "name": "Roman",
+      "surname": "Permyakov",
+      "patronymic": "Jurievich",
+      "birthDate": "02.12.1984",
+      "phoneNumber": "+72222222222",
+      "email": "permyakov@permyakov.ru",
+      "role": "Shipper",
+      "isConfirmed": false
+    },
+    {
+      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bg",
+      "name": "Roman",
+      "surname": "Permyakov",
+      "patronymic": "Jurievich",
+      "birthDate": "02.12.1984",
+      "phoneNumber": "+72222222222",
+      "email": "permyakov@permyakov.ru",
+      "role": "Shipper",
+      "isConfirmed": true
+    }
+  ]
+}
