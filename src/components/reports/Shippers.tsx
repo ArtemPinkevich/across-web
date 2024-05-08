@@ -6,31 +6,28 @@ import { useIntl } from "react-intl";
 import { useState, useEffect } from "react";
 import FormControl from "../global/FormControl";
 import { PersonProps } from "./Person";
-import personService from "../../services/persons";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "../../store/store";
 import { setSettings } from "../../reducers/settingsReducer";
+import { useGetPersonsQuery } from "../../services/persons";
 
 const Shippers = () => {
   const settings = useSelector((state: IRootState) => state.settings);
   const dispatch = useDispatch();
   const intl = useIntl();
+  const { data } = useGetPersonsQuery();
   const [showAll, setShowAll] = useState(false);
-  const [shippers, setShippers] = useState<PersonProps[]>([]);
   const colors = tokens(settings.mode);
   const isFilterSet = settings.filter !== "";
 
+  const shippers =
+    data !== undefined
+      ? data.filter((person) => person.role === "Shipper")
+      : [];
+
   useEffect(() => {
-    const updateDate = async () => {
-      dispatch(setSettings({ ...settings, filter: "" }));
-      const allPersons: PersonProps[] = await personService.getAll();
-      const allShippers = allPersons.filter(
-        (person) => person.role === "Shipper",
-      );
-      setShippers(allShippers);
-    };
-    updateDate();
+    dispatch(setSettings({ ...settings, filter: "" }));
   }, []);
 
   const linkStyle = {
@@ -43,7 +40,7 @@ const Shippers = () => {
       headerName: "ID",
       width: 250,
       renderCell: (id) => (
-        <Link to={`/drivers/${id.value}`} style={linkStyle}>
+        <Link to={`/shippers/${id.value}`} style={linkStyle}>
           {id.value}
         </Link>
       ),

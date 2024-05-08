@@ -8,7 +8,7 @@ import { IRootState } from "../../store/store";
 import { useIntl } from "react-intl";
 import { useState, useEffect } from "react";
 import FormControl from "../global/FormControl";
-import personService from "../../services/persons";
+import { useGetPersonsQuery } from "../../services/persons";
 import { PersonProps } from "./Person";
 import { setSettings } from "../../reducers/settingsReducer";
 
@@ -16,21 +16,16 @@ const Drivers = () => {
   const settings = useSelector((state: IRootState) => state.settings);
   const dispatch = useDispatch();
   const intl = useIntl();
+  const { data } = useGetPersonsQuery();
   const [showAll, setShowAll] = useState(false);
-  const [drivers, setDrivers] = useState<PersonProps[]>([]);
   const colors = tokens(settings.mode);
   const isFilterSet = settings.filter !== "";
 
+  const drivers =
+    data !== undefined ? data.filter((person) => person.role === "Driver") : [];
+
   useEffect(() => {
-    const updateData = async () => {
-      dispatch(setSettings({ ...settings, filter: "" }));
-      const allPersons: PersonProps[] = await personService.getAll();
-      const allDrivers = allPersons.filter(
-        (person) => person.role === "Driver",
-      );
-      setDrivers(allDrivers);
-    };
-    updateData();
+    dispatch(setSettings({ ...settings, filter: "" }));
   }, []);
 
   const linkStyle = {

@@ -19,7 +19,9 @@ const Topbar = () => {
   const isDarkTheme = settings.mode === "dark";
   const isRussian = settings.localization === "ru";
 
-  useEffect(() => {setFilter("")},[]);
+  useEffect(() => {
+    setFilter("");
+  }, []);
 
   const handleOnChangeMode = (mode: PaletteMode) => {
     dispatch(

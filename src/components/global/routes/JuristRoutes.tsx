@@ -2,22 +2,15 @@ import { Routes, Route, useMatch } from "react-router-dom";
 import Shippers from "../../reports/Shippers";
 import Drivers from "../../reports/Drivers";
 import Profile from "../profile/Profile";
-import Person, { PersonProps } from "../../reports/Person";
-import personService from "../../../services/persons";
-import { useState, useEffect } from "react";
+import Person from "../../reports/Person";
+import { useGetPersonsQuery } from "../../../services/persons";
 
 const JuristRoutes = () => {
   const shippersMatch = useMatch("/shippers/:id");
   const driversMatch = useMatch("/drivers/:id");
-  const [persons, setPersons] = useState<PersonProps[]>([]);
+  const { data } = useGetPersonsQuery();
 
-  useEffect(() => {
-    const getPersons = async () => {
-      const p: PersonProps[] = await personService.getAll();
-      setPersons(p);
-    };
-    getPersons();
-  }, []);
+  const persons = data ?? [];
 
   const shipper = shippersMatch
     ? persons.find((person) => person.id === shippersMatch.params.id)
