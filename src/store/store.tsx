@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import settingsReducer from "../reducers/settingsReducer";
+import notificationReducer from "../reducers/notificationReducer";
 import { personApi } from "../services/persons";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
   reducer: {
     settings: settingsReducer,
+    notification: notificationReducer,
     [personApi.reducerPath]: personApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

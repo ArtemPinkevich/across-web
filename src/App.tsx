@@ -7,6 +7,7 @@ import { IRootState } from "./store/store";
 import Topbar from "./components/global/Topbar";
 import Sidebar from "./components/global/sidebar/Sidebar";
 import JuristRoutes from "./components/global/routes/JuristRoutes";
+import Notification from "./components/global/Notification";
 
 const App = () => {
   const lang = useSelector((state: IRootState) => state.settings.localization);
@@ -18,6 +19,7 @@ const App = () => {
         <CssBaseline />
         <div className="app">
           <Sidebar />
+          <Notification />
           <main className="content">
             <Topbar />
             <JuristRoutes />
