@@ -22,7 +22,7 @@ const Notification = () => {
           message:
             "error" in error
               ? `${error.error}`
-              : `${JSON.stringify("data" in error ? error.data : intl.formatMessage({id: "unknownError"}))}`,
+              : `${JSON.stringify("data" in error ? error.data : intl.formatMessage({ id: "unknownError" }))}`,
           isActive: true,
         }),
       );

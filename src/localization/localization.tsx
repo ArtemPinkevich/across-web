@@ -16,9 +16,12 @@ export const messages: Record<string, Record<string, string>> = {
     birthDate: "Date of birth",
     phoneNumber: "Phone number",
     email: "Email",
+    status: "Status",
+    confirmed: "confirmed",
+    notConfirmed: "not confirmed",
 
     //Notification
-    unknownError: "Unknown error",    
+    unknownError: "Unknown error",
   },
   ru: {
     jurist: "ЮРИСТ",
@@ -37,8 +40,11 @@ export const messages: Record<string, Record<string, string>> = {
     birthDate: "Дата рождения",
     phoneNumber: "Номер телефона",
     email: "Электронная почта",
+    status: "Статус",
+    confirmed: "подтвержден",
+    notConfirmed: "не подтвержден",
 
     //Notification
-    unknownError: "Неизвестная ошибка",    
+    unknownError: "Неизвестная ошибка",
   },
 };

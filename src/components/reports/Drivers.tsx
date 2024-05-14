@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Chip } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { tokens } from "../../theme/theme";
 import { Link } from "react-router-dom";
@@ -45,19 +45,19 @@ const Drivers = () => {
     },
     {
       field: "name",
-      headerName: intl.formatMessage({id: "name"}),
+      headerName: intl.formatMessage({ id: "name" }),
     },
     {
       field: "surname",
-      headerName: intl.formatMessage({id: "surname"}),
+      headerName: intl.formatMessage({ id: "surname" }),
     },
     {
       field: "patronymic",
-      headerName: intl.formatMessage({id: "patronymic"}),
+      headerName: intl.formatMessage({ id: "patronymic" }),
     },
     {
       field: "fullName",
-      headerName: intl.formatMessage({id: "fullName"}),      
+      headerName: intl.formatMessage({ id: "fullName" }),
       sortable: false,
       width: 250,
       valueGetter: (_, row) =>
@@ -65,18 +65,31 @@ const Drivers = () => {
     },
     {
       field: "birthDate",
-      headerName: intl.formatMessage({id: "birthDate"}),
+      headerName: intl.formatMessage({ id: "birthDate" }),
       width: 100,
     },
     {
       field: "phoneNumber",
-      headerName: intl.formatMessage({id: "phoneNumber"}),
+      headerName: intl.formatMessage({ id: "phoneNumber" }),
       width: 150,
     },
     {
       field: "email",
-      headerName: intl.formatMessage({id: "email"}),
+      headerName: intl.formatMessage({ id: "email" }),
       width: 250,
+    },
+    {
+      field: "status",
+      headerName: intl.formatMessage({ id: "status" }),
+      width: 250,
+      renderCell: (params) => (
+        <Chip
+          color={params.row.isConfirmed ? "success" : "error"}
+          label={intl.formatMessage({
+            id: params.row.isConfirmed ? "confirmed" : "notConfirmed",
+          })}
+        />
+      ),
     },
   ];
 
