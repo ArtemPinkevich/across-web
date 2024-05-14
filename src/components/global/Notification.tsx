@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "../../store/store";
 import { useEffect } from "react";
 import { setNotification } from "../../reducers/notificationReducer";
+import { useIntl } from "react-intl";
 
 const Notification = () => {
   const notification = useSelector((state: IRootState) => state.notification);
   const dispatch = useDispatch();
+  const intl = useIntl();
   const { isError, error } = useGetPersonsQuery();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const Notification = () => {
           message:
             "error" in error
               ? `${error.error}`
-              : `${JSON.stringify("data" in error ? error.data : "Unknown error")}`,
+              : `${JSON.stringify("data" in error ? error.data : intl.formatMessage({id: "unknownError"}))}`,
           isActive: true,
         }),
       );

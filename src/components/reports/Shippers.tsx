@@ -47,20 +47,19 @@ const Shippers = () => {
     },
     {
       field: "name",
-      headerName: "Name",
+      headerName: intl.formatMessage({id: "name"}),
     },
     {
       field: "surname",
-      headerName: "Surname",
+      headerName: intl.formatMessage({id: "surname"}),
     },
     {
       field: "patronymic",
-      headerName: "Patronymic",
+      headerName: intl.formatMessage({id: "patronymic"}),
     },
     {
       field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
+      headerName: intl.formatMessage({id: "fullName"}),      
       sortable: false,
       width: 250,
       valueGetter: (_, row) =>
@@ -68,17 +67,17 @@ const Shippers = () => {
     },
     {
       field: "birthDate",
-      headerName: "BirthDate",
+      headerName: intl.formatMessage({id: "birthDate"}),
       width: 100,
     },
     {
       field: "phoneNumber",
-      headerName: "PhoneNumber",
+      headerName: intl.formatMessage({id: "phoneNumber"}),
       width: 150,
     },
     {
       field: "email",
-      headerName: "Email",
+      headerName: intl.formatMessage({id: "email"}),
       width: 250,
     },
   ];
