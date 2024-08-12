@@ -1,15 +1,32 @@
-import { Box } from "@mui/material";
-import Header from "../Header";
+import { Box, Paper, Stack, Typography } from "@mui/material";
 import { useIntl } from "react-intl";
+import { useGetProfileQuery } from "../../../store/rtkQuery/profileApi";
 
 const Profile = () => {
-  const intl = useIntl();
+	const intl = useIntl();
 
-  return (
-    <Box m="20px">
-      <Header title={intl.formatMessage({ id: "profile" }).toUpperCase()} />
-    </Box>
-  );
+	const { data: profile } = useGetProfileQuery();
+
+	if (!profile) {
+		return <Box />;
+	}
+
+	return (
+		<Box m="20px">
+			<Paper elevation={3} sx={{ m: 3, p: 3 }}>
+				<Typography variant="h3" color={"GrayText"} fontFamily={"monospace"}>
+					Персональная информация
+				</Typography>
+				<Stack mt={2} mx={2} spacing={1}>
+					<Typography variant="h5">
+						{`${profile.surname ?? ""} ${profile.name ?? ""} ${profile.patronymic ?? ""}`}
+					</Typography>
+					<Typography variant="h5">{`${intl.formatMessage({ id: profile.role })}`}</Typography>
+					<Typography variant="h5">{profile.phoneNumber}</Typography>
+				</Stack>
+			</Paper>
+		</Box>
+	);
 };
 
 export default Profile;

@@ -3,15 +3,26 @@ import settingsReducer from "../reducers/settingsReducer";
 import notificationReducer from "../reducers/notificationReducer";
 import { personApi } from "../services/persons";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import { profileApi } from "./rtkQuery/profileApi";
+import { ordersApi } from "./rtkQuery/ordersApi";
+import { truckApi } from "./rtkQuery/truckApi";
 
 export const store = configureStore({
-  reducer: {
-    settings: settingsReducer,
-    notification: notificationReducer,
-    [personApi.reducerPath]: personApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(personApi.middleware),
+	reducer: {
+		settings: settingsReducer,
+		notification: notificationReducer,
+		[personApi.reducerPath]: personApi.reducer,
+		[profileApi.reducerPath]: profileApi.reducer,
+		[ordersApi.reducerPath]: ordersApi.reducer,
+		[truckApi.reducerPath]: truckApi.reducer,
+	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(
+			personApi.middleware,
+			profileApi.middleware,
+			ordersApi.middleware,
+			truckApi.middleware,
+		),
 });
 
 setupListeners(store.dispatch);

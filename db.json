@@ -1,70 +1,303 @@
 {
-  "persons": [
-    {
-      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bc",
-      "name": "Roman",
-      "surname": "Permyakov",
-      "patronymic": "Jurievich",
-      "birthDate": "02.12.1984",
-      "phoneNumber": "+72222222222",
-      "email": "permyakov@permyakov.ru",
-      "role": "Driver",
-      "isConfirmed": false
-    },
-    {
-      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bb",
-      "name": "Roman",
-      "surname": "Permyakov",
-      "patronymic": "Jurievich",
-      "birthDate": "02.12.1984",
-      "phoneNumber": "+72222222222",
-      "email": "permyakov@permyakov.ru",
-      "role": "Driver",
-      "isConfirmed": false
-    },
-    {
-      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bd",
-      "name": "Roman",
-      "surname": "Permyakov",
-      "patronymic": "Jurievich",
-      "birthDate": "02.12.1984",
-      "phoneNumber": "+72222222222",
-      "email": "permyakov@permyakov.ru",
-      "role": "Driver",
-      "isConfirmed": true
-    },
-    {
-      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3be",
-      "name": "Roman",
-      "surname": "Permyakov",
-      "patronymic": "Jurievich",
-      "birthDate": "02.12.1984",
-      "phoneNumber": "+72222222222",
-      "email": "permyakov@permyakov.ru",
-      "role": "Shipper",
-      "isConfirmed": false
-    },
-    {
-      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bf",
-      "name": "Roman",
-      "surname": "Permyakov",
-      "patronymic": "Jurievich",
-      "birthDate": "02.12.1984",
-      "phoneNumber": "+72222222222",
-      "email": "permyakov@permyakov.ru",
-      "role": "Shipper",
-      "isConfirmed": false
-    },
-    {
-      "id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bg",
-      "name": "Roman",
-      "surname": "Permyakov",
-      "patronymic": "Jurievich",
-      "birthDate": "02.12.1984",
-      "phoneNumber": "+72222222222",
-      "email": "permyakov@permyakov.ru",
-      "role": "Shipper",
-      "isConfirmed": true
-    }
-  ]
+	"persons": [
+		{
+			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bc",
+			"name": "Джейсон",
+			"surname": "Стэтхэм",
+			"patronymic": "",
+			"birthDate": "11.11.1981",
+			"phoneNumber": "+7770007777",
+			"email": "dj@st.ru",
+			"role": "Driver",
+			"approvementStatus": "DocumentsMissing",
+			"documentDtos": [
+				{
+					"documentStatus": 0,
+					"documentType": 0,
+					"comment": ""
+				},
+				{
+					"documentStatus": 0,
+					"documentType": 1,
+					"comment": ""
+				},
+				{
+					"documentStatus": 0,
+					"documentType": 2,
+					"comment": ""
+				},
+				{
+					"documentStatus": 0,
+					"documentType": 2,
+					"comment": ""
+				}
+			]
+		},
+		{
+			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3b2",
+			"name": "Доминик",
+			"surname": "Торетто",
+			"patronymic": "",
+			"birthDate": "11.11.1981",
+			"phoneNumber": "+2227772222",
+			"email": "dj2@st.ru",
+			"role": "Driver",
+			"approvementStatus": "DocumentsMissing",
+			"documentDtos": []
+		},
+		{
+			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bb",
+			"name": "Федор",
+			"surname": "",
+			"patronymic": "Иваныч",
+			"birthDate": "02.12.1984",
+			"phoneNumber": "+72222222222",
+			"email": "permyakov@permyakov.ru",
+			"role": "Driver",
+			"approvementStatus": "Approved",
+			"documentDtos": [
+				{
+					"documentStatus": 2,
+					"documentType": 0,
+					"comment": ""
+				},
+				{
+					"documentStatus": 2,
+					"documentType": 1,
+					"comment": ""
+				},
+				{
+					"documentStatus": 2,
+					"documentType": 2,
+					"comment": ""
+				},
+				{
+					"documentStatus": 2,
+					"documentType": 2,
+					"comment": ""
+				}
+			]
+		},
+		{
+			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bd",
+			"name": "Сашок",
+			"surname": "",
+			"patronymic": "",
+			"birthDate": "02.09.1994",
+			"phoneNumber": "+72222222222",
+			"email": "permyakov@permyakov.ru",
+			"role": "Driver",
+			"approvementStatus": "Unapproved",
+			"documentDtos": [
+				{
+					"documentStatus": 0,
+					"documentType": 0,
+					"comment": ""
+				},
+				{
+					"documentStatus": 1,
+					"documentType": 1,
+					"comment": ""
+				},
+				{
+					"documentStatus": 2,
+					"documentType": 2,
+					"comment": ""
+				},
+				{
+					"documentStatus": 3,
+					"documentType": 3,
+					"comment": "Неразборчивое фото"
+				}
+			]
+		},
+		{
+			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3be",
+			"name": "Римма",
+			"surname": "",
+			"patronymic": "",
+			"birthDate": "02.12.1984",
+			"phoneNumber": "+72222222222",
+			"email": "permyakov@permyakov.ru",
+			"role": "Shipper",
+			"approvementStatus": "Unapproved"
+		},
+		{
+			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bf",
+			"name": "Дима",
+			"surname": "Отец дяди Фёдора",
+			"patronymic": "",
+			"birthDate": "02.02.1904",
+			"phoneNumber": "+72222222222",
+			"email": "permyakov@permyakov.ru",
+			"role": "Shipper",
+			"approvementStatus": "DocumentsMissing"
+		},
+		{
+			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd4bg",
+			"name": "Александр",
+			"surname": "Пушкин",
+			"patronymic": "Сергеевич",
+			"birthDate": "02.12.1984",
+			"phoneNumber": "+72222222222",
+			"email": "permyakov@permyakov.ru",
+			"role": "Shipper",
+			"approvementStatus": "DocumentsMissing"
+		},
+		{
+			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd5bg",
+			"name": "Виктор",
+			"surname": "Цой",
+			"patronymic": "Жив",
+			"birthDate": "02.12.1984",
+			"phoneNumber": "+72222222222",
+			"email": "permyakov@permyakov.ru",
+			"role": "Shipper",
+			"approvementStatus": "Approved"
+		}
+	],
+	"get_profile": {
+		"id": "3bd64e27-cb7f-41b7-9a48-52a0bc3cd5bg",
+		"name": "Юрист",
+		"surname": "Юристов",
+		"patronymic": "Юристович",
+		"birthDate": "01.12.1900",
+		"phoneNumber": "+79007006050",
+		"email": "call@sole.ru",
+		"role": "Lawyer",
+		"approvementStatus": "DocumentsMissing",
+		"documentDtos": []
+	},
+	"get_bids": {
+		"result": 0,
+		"reasons": [],
+		"correlations": [
+			{
+				"shipper": {
+					"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd5bg",
+					"name": "Отправитель",
+					"surname": "Отправителев",
+					"patronymic": "Отправительевич",
+					"birthDate": "01.01.1901",
+					"phoneNumber": "+71110001111",
+					"email": "shipper@mail.ru",
+					"role": "Shipper",
+					"approvementStatus": "Approved"
+				},
+				"driver": {
+					"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bb",
+					"name": "Перевозчик",
+					"surname": "Перевозчиков",
+					"patronymic": "Перевозчикович",
+					"birthDate": "02.02.1902",
+					"phoneNumber": "+72220002222",
+					"email": "driver@mail.ru",
+					"role": "Driver",
+					"approvementStatus": "Approved",
+					"documentDtos": [
+						{
+							"documentStatus": 2,
+							"documentType": 0,
+							"comment": ""
+						},
+						{
+							"documentStatus": 2,
+							"documentType": 1,
+							"comment": ""
+						},
+						{
+							"documentStatus": 2,
+							"documentType": 2,
+							"comment": ""
+						},
+						{
+							"documentStatus": 2,
+							"documentType": 2,
+							"comment": ""
+						}
+					]
+				},
+				"transportation": {
+					"transportationOrderId": 7,
+					"transferInfo": {
+						"loadingDateFrom": "09.10.2024",
+						"loadingDateTo": "",
+						"loadingPlace": {
+							"country": "Россия",
+							"region": "обл. Томская",
+							"city": "г. Томск"
+						},
+						"loadingAddress": "",
+						"unloadingPlace": {
+							"country": "Россия",
+							"region": "обл. Кемеровская",
+							"city": "г. Кемерово"
+						},
+						"unloadingAddress": ""
+					},
+					"cargo": {
+						"id": 0,
+						"createdId": "",
+						"name": "Снег",
+						"weight": 10,
+						"volume": 10,
+						"packagingType": 2,
+						"packagingQuantity": 0,
+						"length": 10,
+						"width": 10,
+						"height": 10,
+						"diameter": 0,
+						"truckRequirements": {
+							"carBodies": [0, 1],
+							"loadingTypeDtos": [0, 1],
+							"unloadingTypeDtos": [0, 1],
+							"adr1": true,
+							"adr2": false,
+							"adr3": true,
+							"adr4": true,
+							"adr5": true,
+							"adr6": true,
+							"adr7": true,
+							"adr8": true,
+							"adr9": true,
+							"tir": true,
+							"ekmt": true,
+							"hasLtl": true,
+							"hasLiftgate": true,
+							"hasStanchionTrailer": true,
+							"carryingCapacity": 10
+						}
+					},
+					"transportationStatus": 1
+				}
+			}
+		]
+	},
+	"get_truck": {
+		"truckId": 0,
+		"trailerType": 0,
+		"carBodyType": 0,
+		"loadingType": [0, 1, 2],
+		"bodyVolume": 27,
+		"innerBodyLength": 15,
+		"innerBodyWidth": 3,
+		"innerBodyHeight": 3,
+
+		"hasLtl": false,
+		"hasLiftgate": true,
+		"hasStanchionTrailer": true,
+		"carryingCapacity": 20,
+
+		"adr1": true,
+		"adr2": true,
+		"adr3": false,
+		"adr4": false,
+		"adr5": false,
+		"adr6": false,
+		"adr7": false,
+		"adr8": false,
+		"adr9": false,
+		"tir": true,
+		"ekmt": true
+	}
 }
