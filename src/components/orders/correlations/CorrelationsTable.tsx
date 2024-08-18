@@ -1,21 +1,18 @@
-import { Box, Chip } from "@mui/material";
-import { useGetBidsQuery } from "../../store/rtkQuery/ordersApi";
-import { ApiCommonResult } from "../../models/commonApi";
+import { Chip } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { placeToDisplayStringConverter } from "../../models/places/PlaceToDisplayStringConverter";
-import { TransportationStatus } from "../../models/orders/TransportationStatus";
-import { TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP } from "../../models/orders/TransportationStatusToDisplayNameMap";
+import { placeToDisplayStringConverter } from "../../../models/places/PlaceToDisplayStringConverter";
+import { TransportationStatus } from "../../../models/orders/TransportationStatus";
+import { TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP } from "../../../models/orders/TransportationStatusToDisplayNameMap";
 import { useNavigate } from "react-router-dom";
+import { ICorrelation } from "../../../models/orders/orderModels";
 
-const Bids = () => {
+export type Props = {
+	correlations: ICorrelation[];
+};
+
+const CorrelationsTable = (props: Props) => {
+	const { correlations } = props;
 	const navigate = useNavigate();
-	const { data: bidsResponse } = useGetBidsQuery();
-
-	if (!bidsResponse || bidsResponse.result == ApiCommonResult.Error) {
-		return <Box />;
-	}
-
-	const correlations = bidsResponse.correlations.filter((o) => o.transportation.transportationOrderId !== undefined);
 
 	const columns: GridColDef<(typeof correlations)[number]>[] = [
 		{
@@ -88,17 +85,15 @@ const Bids = () => {
 	];
 
 	return (
-		<Box m="20px">
-			<DataGrid
-				onRowDoubleClick={(o) => navigate(`/correlations/${o.id}`)}
-				rows={correlations}
-				getRowId={(o) => o.transportation.transportationOrderId!}
-				columns={columns}
-				density="compact"
-				hideFooter
-			/>
-		</Box>
+		<DataGrid
+			onRowDoubleClick={(o) => navigate(`/correlations/${o.id}`)}
+			rows={correlations}
+			getRowId={(o) => o.transportation.transportationOrderId!}
+			columns={columns}
+			density="compact"
+			hideFooter
+		/>
 	);
 };
 
-export default Bids;
+export default CorrelationsTable;

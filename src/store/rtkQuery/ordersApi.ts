@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../../models/constants";
-import { BidsResponse } from "../../models/orders/orderModels";
+import { BidsResponse, ITransportation } from "../../models/orders/orderModels";
 
 export const ordersApi = createApi({
 	reducerPath: "ordersApi",
@@ -10,7 +10,13 @@ export const ordersApi = createApi({
 		getBids: build.query<BidsResponse, void>({
 			query: () => ({ url: `/get_bids` }),
 		}),
+		// getOrder: build.query<ITransportation, number>({
+		// 	query: (id) => ({ url: `/get_order/${id}`, data: id }),
+		// }),
+		getOrder: build.query<ITransportation, number>({
+			query: (id) => ({ url: `/get_order` }),
+		}),
 	}),
 });
 
-export const { useGetBidsQuery } = ordersApi;
+export const { useGetBidsQuery, useGetOrderQuery } = ordersApi;

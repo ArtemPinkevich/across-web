@@ -6,6 +6,9 @@ export const truckApi = createApi({
 	reducerPath: "truckApi",
 	baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}` }),
 	endpoints: (build) => ({
+		// getTruck: build.query<ITruck, number>({
+		// 	query: (id) => ({ url: `/get_truck/${id}`, data: id }),
+		// }),
 		getTruck: build.query<ITruck, void>({
 			query: () => ({ url: `/get_truck` }),
 		}),

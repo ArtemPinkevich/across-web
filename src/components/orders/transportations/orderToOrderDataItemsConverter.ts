@@ -1,44 +1,43 @@
-import { PackagingType } from "../../models/cargo/PackagingType";
-import { PACKAGING_TYPE_DISPLAY_NAME_MAP } from "../../models/cargo/PackagingTypeToDisplayNameMap";
-import { ICorrelation } from "../../models/orders/orderModels";
-import { personStatusToDisplayStringConverter } from "../../models/persons/personStatusConverter";
-import { CARBODY_DISPLAY_NAME_MAP } from "../../models/truck/toDisplayNameMappers/CarBodyToDisplayNameMap";
-import { LOADING_TYPE_DISPLAY_NAME_MAP } from "../../models/truck/toDisplayNameMappers/LoadingTypeToDisplayNameMap";
-import { ITruck } from "../../models/truck/truck";
+import { ICargo } from "../../../models/cargo/ICargo";
+import { PackagingType } from "../../../models/cargo/PackagingType";
+import { PACKAGING_TYPE_DISPLAY_NAME_MAP } from "../../../models/cargo/PackagingTypeToDisplayNameMap";
+import { IProfile } from "../../../models/persons/personModels";
+import { personStatusToDisplayStringConverter } from "../../../models/persons/personStatusConverter";
+import { CARBODY_DISPLAY_NAME_MAP } from "../../../models/truck/toDisplayNameMappers/CarBodyToDisplayNameMap";
+import { LOADING_TYPE_DISPLAY_NAME_MAP } from "../../../models/truck/toDisplayNameMappers/LoadingTypeToDisplayNameMap";
+import { ITruck } from "../../../models/truck/truck";
 
-export type CorrelationDataItem = {
+export type OrderDataItems = {
 	parameterName: string;
 	shipperParameter: string;
 	driverParameter: string;
 };
 
-export const orderToCorrelationDataItemConverter = (
-	correlation: ICorrelation,
+export const orderToOrderDataItemsConverter = (
+	cargo: ICargo,
+	shipper?: IProfile,
+	driver?: IProfile,
 	truck?: ITruck,
-): CorrelationDataItem[] => {
-	const items: CorrelationDataItem[] = [];
+): OrderDataItems[] => {
+	const items: OrderDataItems[] = [];
 
-	console.log(truck);
-
-	if (!correlation) return items;
-
-	const cargo = correlation.transportation.cargo;
+	if (!cargo) return items;
 
 	items.push(
 		{
 			parameterName: "ФИО",
-			shipperParameter: `${correlation.shipper.surname} ${correlation.shipper.name} ${correlation.shipper.patronymic}`,
-			driverParameter: `${correlation.driver.surname} ${correlation.driver.name} ${correlation.driver.patronymic}`,
+			shipperParameter: shipper ? `${shipper.surname} ${shipper.name} ${shipper.patronymic}` : "—",
+			driverParameter: driver ? `${driver.surname} ${driver.name} ${driver.patronymic}` : "—",
 		},
 		{
 			parameterName: "Телефон",
-			shipperParameter: correlation.shipper.phoneNumber,
-			driverParameter: correlation.driver.phoneNumber,
+			shipperParameter: shipper?.phoneNumber ?? "—",
+			driverParameter: driver?.phoneNumber ?? "—",
 		},
 		{
-			parameterName: "Статус",
-			shipperParameter: personStatusToDisplayStringConverter(correlation.shipper.approvementStatus),
-			driverParameter: personStatusToDisplayStringConverter(correlation.driver.approvementStatus),
+			parameterName: "Статус пользователя",
+			shipperParameter: personStatusToDisplayStringConverter(shipper?.approvementStatus),
+			driverParameter: personStatusToDisplayStringConverter(driver?.approvementStatus),
 		},
 		{
 			parameterName: "Вес / Грузоподъемность, т",

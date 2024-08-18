@@ -6,6 +6,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { profileApi } from "./rtkQuery/profileApi";
 import { ordersApi } from "./rtkQuery/ordersApi";
 import { truckApi } from "./rtkQuery/truckApi";
+import { searchApi } from "./rtkQuery/searchApi";
 
 export const store = configureStore({
 	reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
 		[profileApi.reducerPath]: profileApi.reducer,
 		[ordersApi.reducerPath]: ordersApi.reducer,
 		[truckApi.reducerPath]: truckApi.reducer,
+		[searchApi.reducerPath]: searchApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(
@@ -22,6 +24,7 @@ export const store = configureStore({
 			profileApi.middleware,
 			ordersApi.middleware,
 			truckApi.middleware,
+			searchApi.middleware,
 		),
 });
 

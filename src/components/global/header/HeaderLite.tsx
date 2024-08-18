@@ -25,6 +25,18 @@ export default function HeaderLite() {
 						<Button component={Link} to={"/bids"} sx={{ my: 2, color: "whitesmoke" }}>
 							Заявки
 						</Button>
+						<Button component={Link} to={"/matches"} sx={{ my: 2, color: "whitesmoke" }}>
+							Подборки
+						</Button>
+						<Button component={Link} to={"/search"} sx={{ my: 2, color: "whitesmoke" }}>
+							Поиск груза
+						</Button>
+						<Button component={Link} to={"/searchTruck"} sx={{ my: 2, color: "whitesmoke" }}>
+							Поиск машин
+						</Button>
+						<Button component={Link} to={"/in-progress"} sx={{ my: 2, color: "whitesmoke" }}>
+							В работе
+						</Button>
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>

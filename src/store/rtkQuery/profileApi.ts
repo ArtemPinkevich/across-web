@@ -12,7 +12,21 @@ export const profileApi = createApi({
 			query: () => ({ url: `/get_profile` }),
 			providesTags: ["Profile"],
 		}),
+
+		// getShipper: build.query<IProfile, number>({
+		// 	query: (transportationId) => ({ url: `/get_profile/${transportationId}`, data: transportationId }),
+		// }),
+		getShipper: build.query<IProfile, number>({
+			query: (transportationId) => ({ url: `/get_profile` }),
+		}),
+
+		// getDriver: build.query<IProfile, number>({
+		// 	query: (truckId) => ({ url: `/get_profile/${truckId}`, data: truckId }),
+		// }),
+		getDriver: build.query<IProfile, number>({
+			query: (truckId) => ({ url: `/get_profile` }),
+		}),
 	}),
 });
 
-export const { useGetProfileQuery } = profileApi;
+export const { useGetProfileQuery, useGetShipperQuery, useGetDriverQuery } = profileApi;

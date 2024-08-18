@@ -299,5 +299,227 @@
 		"adr9": false,
 		"tir": true,
 		"ekmt": true
+	},
+	"search": {
+		"result": 0,
+		"reasons": [],
+		"transportationOrders": [
+			{
+				"transportationOrderId": 0,
+				"transferInfo": {
+					"loadingDateFrom": "2024-08-05T15:18:14.912Z",
+					"loadingDateTo": "2024-04-28T08:02:17+07:00",
+					"loadingPlace": { "city": "Томск", "country": "Россия", "region": "обл. Томская" },
+					"loadingAddress": "ул. Погрузкина, 1",
+					"unloadingPlace": { "city": "Тараз", "country": "Казахстан", "region": "обл. Таразкая" },
+					"unloadingAddress": "пр. Выгрузкина, 404а/1 к7"
+				},
+				"cargo": {
+					"createdId": "2024-04-27T08:02:17+07:00",
+					"name": "Снег, очень много качественного кристалического снега в коробках (не желтый)",
+					"weight": 50,
+					"volume": 10,
+					"packagingType": 1,
+					"length": 15,
+					"height": 2,
+					"width": 2,
+					"diameter": 3,
+					"packagingQuantity": 99,
+					"truckRequirements": {
+						"carBodies": [0, 1, 2],
+						"loadingTypeDtos": [0, 1],
+						"unloadingTypeDtos": [0, 1],
+						"hasLtl": true,
+						"hasLiftgate": true,
+						"hasStanchionTrailer": true,
+						"carryingCapacity": 69,
+						"adr1": true,
+						"adr2": true,
+						"adr3": true,
+						"adr4": true,
+						"adr5": true,
+						"adr6": true,
+						"adr7": true,
+						"adr8": true,
+						"adr9": true,
+						"tir": true,
+						"ekmt": true
+					}
+				},
+				"transportationStatus": 1
+			},
+			{
+				"transportationOrderId": 1,
+				"transferInfo": {
+					"loadingDateFrom": "2024-04-27T08:02:17+07:00",
+					"loadingDateTo": "",
+					"loadingPlace": { "city": "Санкт-Петербург", "country": "Россия", "region": "обл. Ленинградская" },
+					"loadingAddress": "пр. Невский, 1",
+					"unloadingPlace": { "city": "Астана", "country": "Казахстан", "region": "обл. Целеноградская" },
+					"unloadingAddress": "пр. Выгрузкина, 404а/1 к7"
+				},
+				"cargo": {
+					"createdId": "2024-04-27T08:02:17+07:00",
+					"name": "Воздух",
+					"weight": 100,
+					"volume": 20,
+					"length": 15,
+					"height": 3,
+					"width": 3,
+					"packagingType": 2,
+					"truckRequirements": {
+						"carBodies": [3, 4],
+						"loadingTypeDtos": [1, 2],
+						"unloadingTypeDtos": [0, 1],
+						"hasLtl": false,
+						"hasLiftgate": true,
+						"hasStanchionTrailer": true,
+						"carryingCapacity": 69,
+						"adr1": true,
+						"adr2": false,
+						"adr3": false,
+						"adr4": false,
+						"adr5": false,
+						"adr6": false,
+						"adr7": false,
+						"adr8": false,
+						"adr9": false,
+						"tir": true,
+						"ekmt": false
+					}
+				},
+				"transportationStatus": 1
+			},
+			{
+				"transportationOrderId": 2,
+				"transferInfo": {
+					"loadingDateFrom": "2024-04-27T08:02:17+07:00",
+					"loadingDateTo": "",
+					"loadingPlace": { "city": "Томск", "country": "Россия", "region": "обл. Томская" },
+					"loadingAddress": "ул. Погрузкина, 1",
+					"unloadingPlace": { "city": "Тараз", "country": "Казахстан", "region": "обл. Таразкая" },
+					"unloadingAddress": "пр. Выгрузкина, 404а/1 к7"
+				},
+				"cargo": {
+					"createdId": "2024-04-27T08:02:17+07:00",
+					"name": "Вода",
+					"weight": 150,
+					"volume": 30,
+					"length": 25
+				},
+				"transportationStatus": 1
+			}
+		]
+	},
+	"get_order": {
+		"transportationOrderId": 0,
+		"transferInfo": {
+			"loadingDateFrom": "2024-08-05T15:18:14.912Z",
+			"loadingDateTo": "2024-04-28T08:02:17+07:00",
+			"loadingPlace": { "city": "Томск", "country": "Россия", "region": "обл. Томская" },
+			"loadingAddress": "ул. Погрузкина, 1",
+			"unloadingPlace": { "city": "Тараз", "country": "Казахстан", "region": "обл. Таразкая" },
+			"unloadingAddress": "пр. Выгрузкина, 404а/1 к7"
+		},
+		"cargo": {
+			"id": 11,
+			"createdId": "2024-04-27T08:02:17+07:00",
+			"name": "Снег, очень много качественного кристалического снега в коробках (не желтый)",
+			"weight": 50,
+			"volume": 10,
+			"packagingType": 1,
+			"length": 15,
+			"height": 2,
+			"width": 2,
+			"diameter": 3,
+			"packagingQuantity": 99,
+			"truckRequirements": {
+				"carBodies": [0, 1, 2],
+				"loadingTypeDtos": [0, 1],
+				"unloadingTypeDtos": [0, 1],
+				"hasLtl": true,
+				"hasLiftgate": true,
+				"hasStanchionTrailer": true,
+				"carryingCapacity": 69,
+				"adr1": true,
+				"adr2": true,
+				"adr3": true,
+				"adr4": true,
+				"adr5": true,
+				"adr6": true,
+				"adr7": true,
+				"adr8": true,
+				"adr9": true,
+				"tir": true,
+				"ekmt": true
+			}
+		},
+		"transportationStatus": 1
+	},
+	"search-trucks": {
+		"result": 0,
+		"reasons": [],
+		"trucks": [
+			{
+				"truckId": 0,
+				"trailerType": 0,
+				"carBodyType": 0,
+				"loadingType": [0, 1, 2],
+				"bodyVolume": 27,
+				"innerBodyLength": 15,
+				"innerBodyWidth": 3,
+				"innerBodyHeight": 3,
+
+				"hasLtl": false,
+				"hasLiftgate": true,
+				"hasStanchionTrailer": true,
+				"carryingCapacity": 20,
+
+				"adr1": true,
+				"adr2": true,
+				"adr3": false,
+				"adr4": false,
+				"adr5": false,
+				"adr6": false,
+				"adr7": false,
+				"adr8": false,
+				"adr9": false,
+				"tir": true,
+				"ekmt": true
+			},
+			{
+				"truckId": 1,
+				"trailerType": 1,
+				"carBodyType": 1,
+				"loadingType": [1, 2],
+				"bodyVolume": 81,
+				"innerBodyLength": 22,
+				"innerBodyWidth": 2,
+				"innerBodyHeight": 2,
+
+				"hasLtl": true,
+				"hasLiftgate": false,
+				"hasStanchionTrailer": false,
+				"carryingCapacity": 50,
+
+				"adr1": false,
+				"adr2": false,
+				"adr3": false,
+				"adr4": false,
+				"adr5": false,
+				"adr6": false,
+				"adr7": false,
+				"adr8": false,
+				"adr9": false,
+				"tir": true,
+				"ekmt": false
+			},
+			{
+				"truckId": 3,
+				"trailerType": 3,
+				"carBodyType": 3,
+				"loadingType": [3, 4]
+			}
+		]
 	}
 }
