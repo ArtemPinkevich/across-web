@@ -1,8 +1,8 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { useIntl } from "react-intl";
-import { useGetProfileQuery } from "../../../store/rtkQuery/profileApi";
+import { useGetProfileQuery } from "../../store/rtkQuery/profileApi";
 
-const Profile = () => {
+const ProfileTab = () => {
 	const intl = useIntl();
 
 	const { data: profile } = useGetProfileQuery();
@@ -29,4 +29,4 @@ const Profile = () => {
 	);
 };
 
-export default Profile;
+export default ProfileTab;

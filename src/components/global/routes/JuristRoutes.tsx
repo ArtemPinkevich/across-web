@@ -1,16 +1,16 @@
 import { Routes, Route, useMatch } from "react-router-dom";
-import Profile from "../profile/Profile";
-import Person from "../../person/Person";
+import ProfileTab from "../../pages/ProfileTab";
 import { useGetPersonsQuery } from "../../../store/rtkQuery/persons";
-import Counterparties from "../../counterparties/Counterparties";
-import Bids from "../../orders/BidsTab";
-import Correlation from "../../orders/correlations/Correlation";
-import MatchesTab from "../../orders/MatchesTab";
-import AtWorkTab from "../../orders/AtWorkTab";
-import SearchTab from "../../orders/SearchTab";
-import TransportationOrderDetails from "../../orders/transportations/TransportationOrderDetails";
-import SearchTruckTab from "../../orders/SearchTruckTab";
-import TruckDetails from "../../orders/trucks/TruckDetails";
+import CounterpartiesTab from "../../pages/CounterpartiesTab";
+import Correlation from "../../pages/correlations/Correlation";
+import MatchesTab from "../../pages/MatchesTab";
+import AtWorkTab from "../../pages/AtWorkTab";
+import SearchCargoTab from "../../pages/SearchCargoTab";
+import TransportationOrderDetails from "../../pages/transportations/TransportationOrderDetails";
+import SearchTruckTab from "../../pages/SearchTruckTab";
+import TruckDetails from "../../pages/trucks/TruckDetails";
+import BidsTab from "../../pages/BidsTab";
+import Person from "../../pages/counterparties/person/Person";
 
 const JuristRoutes = () => {
 	const counterpartiesMatch = useMatch("/counterparties/:id");
@@ -23,13 +23,13 @@ const JuristRoutes = () => {
 
 	return (
 		<Routes>
-			<Route path="/" element={<Counterparties />} />
-			<Route path="/counterparties" element={<Counterparties />} />
+			<Route path="/" element={<CounterpartiesTab />} />
+			<Route path="/counterparties" element={<CounterpartiesTab />} />
 			<Route path="/counterparties/:id" element={<Person person={counterparty} />} />
-			<Route path="/profile" element={<Profile />} />
-			<Route path="/bids" element={<Bids />} />
+			<Route path="/profile" element={<ProfileTab />} />
+			<Route path="/bids" element={<BidsTab />} />
 			<Route path="/matches" element={<MatchesTab />} />
-			<Route path="/search" element={<SearchTab />} />
+			<Route path="/search" element={<SearchCargoTab />} />
 			<Route path="/searchTruck" element={<SearchTruckTab />} />
 			<Route path="/in-progress" element={<AtWorkTab />} />
 			<Route path="/correlations/:id" element={<Correlation />} />

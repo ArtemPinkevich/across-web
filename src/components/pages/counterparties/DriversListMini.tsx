@@ -1,12 +1,12 @@
 import { Button, Divider, List, ListItem, ListItemText, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { IRootState } from "../../store/store";
+import { IRootState } from "../../../store/store";
 import { useEffect } from "react";
-import { useGetPersonsQuery } from "../../store/rtkQuery/persons";
-import { setSettings } from "../../store/slices/settingsSlice";
+import { useGetPersonsQuery } from "../../../store/rtkQuery/persons";
+import { setSettings } from "../../../store/slices/settingsSlice";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { PersonStatus } from "../../models/persons/personModels";
+import { PersonStatus } from "../../../models/persons/personModels";
 
 const DriversList = () => {
 	const settings = useSelector((state: IRootState) => state.settings);

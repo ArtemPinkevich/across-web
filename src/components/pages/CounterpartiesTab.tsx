@@ -11,11 +11,11 @@ import { useIntl } from "react-intl";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLazyGetPersonsQuery } from "../../store/rtkQuery/persons";
-import { PersonProps } from "../person/Person";
-import CounterpartiesFilters from "./CounterpartiesFilters";
+import CounterpartiesFilters from "./counterparties/CounterpartiesFilters";
 import { PersonRole, PersonStatus } from "../../models/persons/personModels";
+import { PersonProps } from "./counterparties/person/Person";
 
-const Counterparties = () => {
+const CounterpartiesTab = () => {
 	const navigate = useNavigate();
 	const intl = useIntl();
 	const [trigger, { data }] = useLazyGetPersonsQuery();
@@ -103,4 +103,4 @@ const Counterparties = () => {
 	);
 };
 
-export default Counterparties;
+export default CounterpartiesTab;

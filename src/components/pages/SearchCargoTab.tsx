@@ -45,7 +45,7 @@ export interface ISelectItem {
 	displayName: string;
 }
 
-const SearchTab = () => {
+const SearchCargoTab = () => {
 	const [trigger, { data: searchResponse }] = useLazySearchTransportationsQuery();
 
 	const [loadingPlace, setLoadingPlace] = useState<string>("");
@@ -595,4 +595,4 @@ const SearchTab = () => {
 	);
 };
 
-export default SearchTab;
+export default SearchCargoTab;

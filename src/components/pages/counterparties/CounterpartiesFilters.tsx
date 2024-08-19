@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Stack } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { PersonRole, PersonStatus } from "../../models/persons/personModels";
+import { PersonRole, PersonStatus } from "../../../models/persons/personModels";
 
 type Props = {
 	onFiltersChange: (personRole: PersonRole, personStatus: PersonStatus) => void;

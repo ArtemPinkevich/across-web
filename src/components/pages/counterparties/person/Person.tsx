@@ -1,7 +1,7 @@
 import { Box, Button, Chip, Divider, Paper, Stack, Typography } from "@mui/material";
 import { useIntl } from "react-intl";
 import Documents from "./Documents";
-import { PersonStatus, IUserDocument, PersonRole } from "../../models/persons/personModels";
+import { IUserDocument, PersonRole, PersonStatus } from "../../../../models/persons/personModels";
 
 export type PersonProps = {
 	id: string;

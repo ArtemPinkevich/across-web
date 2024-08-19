@@ -16,11 +16,11 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import DocumentFullScreenDialog from "./DocumentFullScreen";
+import { IUserDocument, UserDocumentStatus } from "../../../../models/persons/personModels";
 import {
-	documentTypeToDisplayStringConverter,
 	documentStatusToDisplayStringConverter,
-} from "../../models/persons/documentConverters";
-import { IUserDocument, UserDocumentStatus } from "../../models/persons/personModels";
+	documentTypeToDisplayStringConverter,
+} from "../../../../models/persons/documentConverters";
 
 export type DocsProps = {
 	documents: IUserDocument[];
