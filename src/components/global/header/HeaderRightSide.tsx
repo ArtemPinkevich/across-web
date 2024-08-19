@@ -1,6 +1,6 @@
 import { PaletteMode, Tooltip } from "@mui/material";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -46,11 +46,11 @@ export default function HeaderRightSide() {
         onClick={() => handleOnChangeLang(isRussian ? "en" : "ru")}
       >
         <FormattedMessage id="lang" />
-      </IconButton>
+      </IconButton>*/}
 
-      <IconButton>
-        <PersonOutlinedIcon fontSize="small" />
-      </IconButton> */}
+			<IconButton component={Link} to={"/profile"}>
+				<PersonOutlinedIcon />
+			</IconButton>
 
 			<Tooltip title="Выйти" sx={{ ml: 2 }}>
 				<IconButton>

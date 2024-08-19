@@ -1,43 +1,46 @@
-import { Container, Button } from "@mui/material";
+import { Container, Tabs, Tab } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { Link } from "react-router-dom";
 import HeaderRightSide from "./HeaderRightSide";
 import { useIntl } from "react-intl";
+import { useGetProfileQuery } from "../../../store/rtkQuery/profileApi";
+import { PersonRole } from "../../../models/persons/personModels";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../store/store";
 
 export default function HeaderLite() {
 	const intl = useIntl();
+	const { data: profile } = useGetProfileQuery();
+	const settings = useSelector((state: IRootState) => state.settings);
+
+	const [selectedTab, setSelectedTab] = useState(0);
 
 	return (
-		<AppBar position="static">
+		<AppBar position="static" color={settings.mode === "light" ? "transparent" : "default"}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<Box sx={{ flexGrow: 1, display: "flex" }}>
-						<Button component={Link} to={"/Counterparties"} sx={{ my: 2, color: "whitesmoke" }}>
-							{intl.formatMessage({ id: "counterparties" })}
-						</Button>
+					{profile?.role === PersonRole.LAWYER && (
+						<Box sx={{ flexGrow: 1, display: "flex" }}>
+							<Tabs value={selectedTab} onChange={(_, newValue) => setSelectedTab(newValue)}>
+								<Tab label={intl.formatMessage({ id: "counterparties" })} component={Link} to={"/counterparties"} />
+							</Tabs>
+						</Box>
+					)}
 
-						<Button component={Link} to={"/profile"} sx={{ my: 2, color: "whitesmoke" }}>
-							{intl.formatMessage({ id: "profile" })}
-						</Button>
-
-						<Button component={Link} to={"/bids"} sx={{ my: 2, color: "whitesmoke" }}>
-							Заявки
-						</Button>
-						<Button component={Link} to={"/matches"} sx={{ my: 2, color: "whitesmoke" }}>
-							Подборки
-						</Button>
-						<Button component={Link} to={"/search"} sx={{ my: 2, color: "whitesmoke" }}>
-							Поиск груза
-						</Button>
-						<Button component={Link} to={"/searchTruck"} sx={{ my: 2, color: "whitesmoke" }}>
-							Поиск машин
-						</Button>
-						<Button component={Link} to={"/in-progress"} sx={{ my: 2, color: "whitesmoke" }}>
-							В работе
-						</Button>
-					</Box>
+					{profile?.role === PersonRole.ADMIN && (
+						<Box sx={{ flexGrow: 1, display: "flex" }}>
+							<Tabs value={selectedTab} onChange={(_, newValue) => setSelectedTab(newValue)}>
+								<Tab label="Заявки" component={Link} to={"/bids"} />
+								<Tab label="Подборки" component={Link} to={"/matches"} />
+								<Tab label="Поиск груза" component={Link} to={"/search"} />
+								<Tab label="Поиск машин" component={Link} to={"/searchTruck"} />
+								<Tab label="В работе" component={Link} to={"/in-progress"} />
+							</Tabs>
+						</Box>
+					)}
 
 					<Box sx={{ flexGrow: 0 }}>
 						<HeaderRightSide />
