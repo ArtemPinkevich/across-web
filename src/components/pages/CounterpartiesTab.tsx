@@ -12,14 +12,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLazyGetPersonsQuery } from "../../store/rtkQuery/persons";
 import CounterpartiesFilters from "./counterparties/CounterpartiesFilters";
-import { PersonRole, PersonStatus } from "../../models/persons/personModels";
-import { PersonProps } from "./counterparties/person/Person";
+import { IProfile, PersonRole, PersonStatus } from "../../models/persons/personModels";
 
 const CounterpartiesTab = () => {
 	const navigate = useNavigate();
 	const intl = useIntl();
 	const [trigger, { data }] = useLazyGetPersonsQuery();
-	const [filtredPersons, setFiltredPersons] = useState<PersonProps[]>([]);
+	const [filtredPersons, setFiltredPersons] = useState<IProfile[]>([]);
 
 	useEffect(() => {
 		const getPersonsAsync = async () => {

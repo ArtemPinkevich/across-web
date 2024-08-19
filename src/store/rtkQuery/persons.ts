@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../../models/constants";
-import { PersonProps } from "../../components/pages/counterparties/person/Person";
+import { IProfile } from "../../models/persons/personModels";
 
 export const personApi = createApi({
 	reducerPath: "persons",
@@ -9,7 +9,7 @@ export const personApi = createApi({
 	refetchOnFocus: true,
 	refetchOnReconnect: true,
 	endpoints: (builder) => ({
-		getPersons: builder.query<PersonProps[], void>({
+		getPersons: builder.query<IProfile[], void>({
 			query: () => "",
 			providesTags: ["Persons"],
 		}),

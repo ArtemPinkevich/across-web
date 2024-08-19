@@ -1,22 +1,9 @@
 import { Box, Button, Chip, Divider, Paper, Stack, Typography } from "@mui/material";
 import { useIntl } from "react-intl";
 import Documents from "./Documents";
-import { IUserDocument, PersonRole, PersonStatus } from "../../../../models/persons/personModels";
+import { IProfile, PersonRole, PersonStatus } from "../../../../models/persons/personModels";
 
-export type PersonProps = {
-	id: string;
-	name: string;
-	surname: string;
-	patronymic: string;
-	birthDate: string;
-	phoneNumber: string;
-	email: string;
-	role: string;
-	approvementStatus: PersonStatus;
-	documentDtos: IUserDocument[];
-};
-
-const Person = ({ person }: { person: PersonProps | null | undefined }) => {
+const Person = ({ person }: { person: IProfile | null | undefined }) => {
 	const intl = useIntl();
 	if (!person) {
 		return <Box />;
