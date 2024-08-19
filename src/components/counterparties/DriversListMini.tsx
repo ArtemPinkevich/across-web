@@ -2,7 +2,7 @@ import { Button, Divider, List, ListItem, ListItemText, Typography } from "@mui/
 import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "../../store/store";
 import { useEffect } from "react";
-import { useGetPersonsQuery } from "../../services/persons";
+import { useGetPersonsQuery } from "../../store/rtkQuery/persons";
 import { setSettings } from "../../reducers/settingsReducer";
 import React from "react";
 import { useNavigate } from "react-router-dom";

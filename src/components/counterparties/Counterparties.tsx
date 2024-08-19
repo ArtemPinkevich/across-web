@@ -10,7 +10,7 @@ import {
 import { useIntl } from "react-intl";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLazyGetPersonsQuery } from "../../services/persons";
+import { useLazyGetPersonsQuery } from "../../store/rtkQuery/persons";
 import { PersonProps } from "../person/Person";
 import CounterpartiesFilters from "./CounterpartiesFilters";
 import { PersonRole, PersonStatus } from "../../models/persons/personModels";

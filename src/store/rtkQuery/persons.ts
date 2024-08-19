@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { PersonProps } from "../components/person/Person";
-import { BASE_URL } from "../models/constants";
+import { PersonProps } from "../../components/person/Person";
+import { BASE_URL } from "../../models/constants";
 
 export const personApi = createApi({
 	reducerPath: "persons",

@@ -1,7 +1,7 @@
 import { Routes, Route, useMatch } from "react-router-dom";
 import Profile from "../profile/Profile";
 import Person from "../../person/Person";
-import { useGetPersonsQuery } from "../../../services/persons";
+import { useGetPersonsQuery } from "../../../store/rtkQuery/persons";
 import Counterparties from "../../counterparties/Counterparties";
 import Bids from "../../orders/BidsTab";
 import Correlation from "../../orders/correlations/Correlation";
