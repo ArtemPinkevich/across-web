@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "../../store/store";
 import { useEffect } from "react";
 import { useGetPersonsQuery } from "../../store/rtkQuery/persons";
-import { setSettings } from "../../reducers/settingsReducer";
+import { setSettings } from "../../store/slices/settingsSlice";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { PersonStatus } from "../../models/persons/personModels";

@@ -5,7 +5,7 @@ import { AlertTitle } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "../../store/store";
 import { useEffect } from "react";
-import { setNotification } from "../../reducers/notificationReducer";
+import { setNotification } from "../../store/slices/notificationSlice";
 import { useIntl } from "react-intl";
 
 const Notification = () => {

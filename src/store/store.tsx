@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import settingsReducer from "../reducers/settingsReducer";
-import notificationReducer from "../reducers/notificationReducer";
+import settingsReducer from "./slices/settingsSlice";
+import notificationReducer from "./slices/notificationSlice";
 import { personApi } from "./rtkQuery/persons";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { profileApi } from "./rtkQuery/profileApi";

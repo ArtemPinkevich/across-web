@@ -8,7 +8,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../store/store";
 import { FormattedMessage } from "react-intl";
-import { setSettings } from "../../../reducers/settingsReducer";
+import { setSettings } from "../../../store/slices/settingsSlice";
 import React from "react";
 
 export default function HeaderRightSide() {
