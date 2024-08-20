@@ -1,6 +1,6 @@
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { useGetPersonsQuery } from "../../store/rtkQuery/persons";
+import { useGetPersonsQuery } from "../../store/rtkQuery/personsApi";
 import { AlertTitle } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "../../store/store";

@@ -1,6 +1,6 @@
 import { Routes, Route, useMatch } from "react-router-dom";
 import ProfileTab from "../../pages/ProfileTab";
-import { useGetPersonsQuery } from "../../../store/rtkQuery/persons";
+import { useGetPersonsQuery } from "../../../store/rtkQuery/personsApi";
 import CounterpartiesTab from "../../pages/CounterpartiesTab";
 import Correlation from "../../pages/correlations/Correlation";
 import MatchesTab from "../../pages/MatchesTab";

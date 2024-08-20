@@ -1,15 +1,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BASE_URL } from "../../models/constants";
-import { IProfile } from "../../models/persons/personModels";
+import { BASE_URL, JSON_SERVER_URL } from "../../models/constants";
+import { IChangeDocumentStatusRequest, IProfile } from "../../models/persons/personModels";
+import { DefaultResponse } from "../../models/commonApi";
+
+// Base server
+// const USED_BASE_URL = BASE_URL
+// const GET_PROFILE_URL = "/Profiles/get_profile";
+
+// json-server
+const USED_BASE_URL = JSON_SERVER_URL;
+const GET_PROFILE_URL = "/get_profile";
 
 export const profileApi = createApi({
 	reducerPath: "profileApi",
 	tagTypes: ["Profile"],
-	baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}` }),
+	baseQuery: fetchBaseQuery({ baseUrl: `${USED_BASE_URL}` }),
 	refetchOnMountOrArgChange: true,
 	endpoints: (build) => ({
 		getProfile: build.query<IProfile, void>({
-			query: () => ({ url: `/get_profile` }),
+			query: () => ({ url: GET_PROFILE_URL }),
 			providesTags: ["Profile"],
 		}),
 

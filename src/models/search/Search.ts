@@ -14,8 +14,15 @@ export interface SearchResponse {
 	transportationOrders: ITransportation[];
 }
 
+export interface DriverDto {
+	userId: string;
+	name: string;
+	surname: string;
+	truck: ITruck;
+}
+
 export interface SearchTrucksResponse {
 	result: ApiCommonResult;
 	reasons: string[];
-	trucks: ITruck[];
+	drivers: DriverDto[];
 }

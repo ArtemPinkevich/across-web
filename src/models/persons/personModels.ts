@@ -8,10 +8,10 @@ export enum PersonRole {
 }
 
 export enum PersonStatus {
-	NONE = "None",
-	DOCUMENTS_MISSING = "DocumentsMissing",
-	CONFIRMED = "Approved",
-	UNCONFIRMED = "Unapproved",
+	NONE,
+	DOCUMENTS_MISSING,
+	CONFIRMED,
+	UNCONFIRMED,
 }
 
 export enum UserDocumentType {
@@ -43,5 +43,18 @@ export interface IProfile {
 	birthDate?: string; // Строка ISO
 	phoneNumber: string;
 	documentDtos: IUserDocument[];
-	approvementStatus: PersonStatus;
+	status: PersonStatus;
+}
+
+export interface IChangeDocumentStatusRequest {
+	userId: string;
+	documentType: UserDocumentType;
+	documentStatus: UserDocumentStatus;
+	comment: string;
+}
+
+export interface IChangePersonStatusRequest {
+	userId: string;
+	personStatus: PersonStatus;
+	comment: string;
 }

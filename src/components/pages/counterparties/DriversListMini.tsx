@@ -2,7 +2,7 @@ import { Button, Divider, List, ListItem, ListItemText, Typography } from "@mui/
 import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "../../../store/store";
 import { useEffect } from "react";
-import { useGetPersonsQuery } from "../../../store/rtkQuery/persons";
+import { useGetPersonsQuery } from "../../../store/rtkQuery/personsApi";
 import { setSettings } from "../../../store/slices/settingsSlice";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +49,7 @@ const DriversList = () => {
 							primary={`${o.name} ${o.patronymic} ${o.surname}`}
 							secondary={
 								<React.Fragment>
-									{o.approvementStatus === PersonStatus.CONFIRMED ? (
+									{o.status === PersonStatus.CONFIRMED ? (
 										<Typography variant="body2" color="forestgreen">
 											Подтвержден
 										</Typography>

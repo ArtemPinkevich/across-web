@@ -1,4 +1,9 @@
 export enum ApiCommonResult {
-    Ok,
-    Error,
+	Ok,
+	Error,
+}
+
+export interface DefaultResponse {
+	result: ApiCommonResult;
+	reasons: string[];
 }

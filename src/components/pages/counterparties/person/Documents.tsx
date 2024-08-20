@@ -14,43 +14,94 @@ import {
 	Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DocumentFullScreenDialog from "./DocumentFullScreen";
-import { IUserDocument, UserDocumentStatus } from "../../../../models/persons/personModels";
+import {
+	IChangeDocumentStatusRequest,
+	IProfile,
+	IUserDocument,
+	UserDocumentStatus,
+	UserDocumentType,
+} from "../../../../models/persons/personModels";
 import {
 	documentStatusToDisplayStringConverter,
 	documentTypeToDisplayStringConverter,
 } from "../../../../models/persons/documentConverters";
+import { getImageFromBackend } from "../../../../services/ImageHelper";
+import { useChangeDocStatusMutation } from "../../../../store/rtkQuery/personsApi";
 
 export type DocsProps = {
 	documents: IUserDocument[];
+	person: IProfile;
 };
 
 const Documents = (props: DocsProps) => {
-	const { documents } = props;
+	const { documents, person } = props;
 
+	const [rejectedDocument, setRejectedDocument] = useState<IUserDocument>();
 	const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
 	const [rejectReason, setRejectReason] = useState("");
-
 	const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
 	const [fullscreenDocumentTitle, setFullscreenDocumentTitle] = useState("");
+	const [fullscreenDocument, setFullscreenDocument] = useState<IUserDocument>();
+	const [documentImagesMap, setDocumentImagesMap] = useState<Map<UserDocumentType, string>>(new Map());
+
+	const [changeDocStatus] = useChangeDocStatusMutation();
+
+	useEffect(() => {
+		documents?.forEach((o) => getImageFromBackendAsync(o));
+	}, []);
+
+	const getImageFromBackendAsync = async (document: IUserDocument) => {
+		if (document?.documentType && document.documentStatus != UserDocumentStatus.NONE) {
+			const base64 = await getImageFromBackend(document.documentType);
+			if (base64) {
+				setDocumentImagesMap((prev) => new Map(prev.set(document.documentType, base64)));
+			}
+		}
+	};
 
 	const handleDocumentImageClick = (document: IUserDocument) => {
+		setFullscreenDocument(document);
 		setFullscreenDocumentTitle(documentTypeToDisplayStringConverter(document.documentType));
 		setDocumentDialogOpen(true);
 	};
 
-	const handleDocumentDialogClose = () => {
-		setDocumentDialogOpen(false);
+	const handleDocumentAccept = (document: IUserDocument) => {
+		const request: IChangeDocumentStatusRequest = {
+			userId: person.id,
+			documentType: document.documentType,
+			documentStatus: UserDocumentStatus.ACCEPTED,
+			comment: "",
+		};
+
+		changeDocStatus(request);
 	};
 
-	const handleRejectClick = () => {
+	const handleRejectClick = (document: IUserDocument) => {
+		setRejectedDocument(document);
 		setRejectDialogOpen(true);
 	};
 
-	const handleRejectDialogClose = () => {
+	const handleRejectCancel = () => {
 		setRejectReason("");
 		setRejectDialogOpen(false);
+	};
+
+	const handleRejectConfirm = () => {
+		setRejectReason("");
+		setRejectDialogOpen(false);
+
+		if (rejectedDocument) {
+			const request: IChangeDocumentStatusRequest = {
+				userId: person.id,
+				documentType: rejectedDocument.documentType,
+				documentStatus: UserDocumentStatus.REJECTED,
+				comment: rejectReason,
+			};
+
+			changeDocStatus(request);
+		}
 	};
 
 	return (
@@ -69,7 +120,7 @@ const Documents = (props: DocsProps) => {
 											? "green"
 											: document?.documentStatus === UserDocumentStatus.VERIFICATION
 												? "orange"
-												: "red"
+												: "red" // rejected
 								}
 							>
 								{documentStatusToDisplayStringConverter(document.documentStatus)}
@@ -82,23 +133,26 @@ const Documents = (props: DocsProps) => {
 								component="img"
 								onClick={() => handleDocumentImageClick(document)}
 								sx={{
-									//maxHeight: { xs: 167, sm: 233, md: 500 },
 									maxWidth: { xs: 300, sm: 400, md: 500 },
 								}}
-								alt="The house from the offer."
-								src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
+								src={documentImagesMap.get(document.documentType)}
+								//src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
 							/>
 						</Stack>
 					</AccordionDetails>
 					<AccordionActions>
 						{(document?.documentStatus === UserDocumentStatus.ACCEPTED ||
 							document?.documentStatus === UserDocumentStatus.VERIFICATION) && (
-							<Button color="warning" onClick={handleRejectClick}>
+							<Button color="warning" onClick={() => handleRejectClick(document)}>
 								Отклонить
 							</Button>
 						)}
 						{(document?.documentStatus === UserDocumentStatus.VERIFICATION ||
-							document?.documentStatus === UserDocumentStatus.REJECTED) && <Button color="success">Подтвердить</Button>}
+							document?.documentStatus === UserDocumentStatus.REJECTED) && (
+							<Button color="success" onClick={() => handleDocumentAccept(document)}>
+								Подтвердить
+							</Button>
+						)}
 					</AccordionActions>
 				</Accordion>
 			))}
@@ -106,11 +160,12 @@ const Documents = (props: DocsProps) => {
 			<DocumentFullScreenDialog
 				isOpen={documentDialogOpen}
 				title={fullscreenDocumentTitle}
-				imgSrc="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
-				onClose={handleDocumentDialogClose}
+				imgSrc={fullscreenDocument?.documentType ? documentImagesMap.get(fullscreenDocument.documentType) ?? "" : ""}
+				//imgSrc="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
+				onClose={() => setDocumentDialogOpen(false)}
 			/>
 
-			<Dialog fullWidth open={rejectDialogOpen} onClose={handleRejectDialogClose}>
+			<Dialog fullWidth open={rejectDialogOpen} onClose={handleRejectCancel}>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-description">Укажите, пожалуйста, причину отказа.</DialogContentText>
 					<TextField
@@ -127,10 +182,10 @@ const Documents = (props: DocsProps) => {
 					/>
 				</DialogContent>
 				<DialogActions>
-					<Button variant="contained" onClick={handleRejectDialogClose}>
+					<Button variant="contained" onClick={handleRejectCancel}>
 						Отмена
 					</Button>
-					<Button variant="contained" onClick={handleRejectDialogClose} autoFocus>
+					<Button variant="contained" onClick={handleRejectConfirm} autoFocus>
 						ОК
 					</Button>
 				</DialogActions>

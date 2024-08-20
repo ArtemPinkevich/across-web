@@ -1,26 +1,34 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BASE_URL } from "../../models/constants";
+import { BASE_URL, JSON_SERVER_URL } from "../../models/constants";
 import { SearchRequest, SearchResponse, SearchTrucksResponse } from "../../models/search/Search";
+
+// Base server
+const USED_BASE_URL = BASE_URL;
+const SEARCH_URL = "/Search/search";
+const SEARCH_TRUCKS_URL = "/Search/search_trucks";
+
+// json-server
+// const USED_BASE_URL = JSON_SERVER_URL;
+// const SEARCH_URL = "/search";
+// const SEARCH_TRUCKS_URL = "/search-trucks";
 
 export const searchApi = createApi({
 	reducerPath: "searchApi",
-	baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}` }),
+	baseQuery: fetchBaseQuery({ baseUrl: `${USED_BASE_URL}` }),
 	endpoints: (build) => ({
 		searchTransportations: build.query<SearchResponse, SearchRequest>({
-			// query: (searchRequest) => ({
-			// 	url: `Search/search?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
-			// 		searchRequest.loadingDate,
-			// 	)}`,
-
-			query: () => ({ url: `/search` }),
+			query: (searchRequest) => ({
+				url: `${SEARCH_URL}?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
+					searchRequest.loadingDate,
+				)}`,
+			}),
 		}),
 		searchTrucks: build.query<SearchTrucksResponse, SearchRequest>({
-			// query: (searchRequest) => ({
-			// 	url: `Search/search-trucks?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
-			// 		searchRequest.loadingDate,
-			// 	)}`,
-
-			query: () => ({ url: `/search-trucks` }),
+			query: (searchRequest) => ({
+				url: `${SEARCH_TRUCKS_URL}?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
+					searchRequest.loadingDate,
+				)}`,
+			}),
 		}),
 	}),
 });

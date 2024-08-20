@@ -1,5 +1,5 @@
 {
-	"persons": [
+	"get_shippers_and_drivers": [
 		{
 			"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bc",
 			"name": "Джейсон",
@@ -164,7 +164,7 @@
 		"birthDate": "01.12.1900",
 		"phoneNumber": "+79007006050",
 		"email": "call@sole.ru",
-		"role": "Lawyer",
+		"role": "Admin",
 		"approvementStatus": "DocumentsMissing",
 		"documentDtos": []
 	},
@@ -459,66 +459,71 @@
 	"search-trucks": {
 		"result": 0,
 		"reasons": [],
-		"trucks": [
+		"drivers": [
 			{
-				"truckId": 0,
-				"trailerType": 0,
-				"carBodyType": 0,
-				"loadingType": [0, 1, 2],
-				"bodyVolume": 27,
-				"innerBodyLength": 15,
-				"innerBodyWidth": 3,
-				"innerBodyHeight": 3,
+				"userId": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bc",
+				"name": "Джейсон",
+				"surname": "Стэтхэм",
+				"truck": {
+					"truckId": 0,
+					"trailerType": 0,
+					"carBodyType": 0,
+					"loadingType": [0, 1, 2],
+					"bodyVolume": 27,
+					"innerBodyLength": 15,
+					"innerBodyWidth": 3,
+					"innerBodyHeight": 3,
 
-				"hasLtl": false,
-				"hasLiftgate": true,
-				"hasStanchionTrailer": true,
-				"carryingCapacity": 20,
+					"hasLtl": false,
+					"hasLiftgate": true,
+					"hasStanchionTrailer": true,
+					"carryingCapacity": 20,
 
-				"adr1": true,
-				"adr2": true,
-				"adr3": false,
-				"adr4": false,
-				"adr5": false,
-				"adr6": false,
-				"adr7": false,
-				"adr8": false,
-				"adr9": false,
-				"tir": true,
-				"ekmt": true
+					"adr1": true,
+					"adr2": true,
+					"adr3": false,
+					"adr4": false,
+					"adr5": false,
+					"adr6": false,
+					"adr7": false,
+					"adr8": false,
+					"adr9": false,
+					"tir": true,
+					"ekmt": true
+				}
 			},
 			{
-				"truckId": 1,
-				"trailerType": 1,
-				"carBodyType": 1,
-				"loadingType": [1, 2],
-				"bodyVolume": 81,
-				"innerBodyLength": 22,
-				"innerBodyWidth": 2,
-				"innerBodyHeight": 2,
+				"userId": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3b2",
+				"name": "Доминик",
+				"surname": "Торетто",
 
-				"hasLtl": true,
-				"hasLiftgate": false,
-				"hasStanchionTrailer": false,
-				"carryingCapacity": 50,
+				"truck": {
+					"truckId": 1,
+					"trailerType": 1,
+					"carBodyType": 1,
+					"loadingType": [1, 2],
+					"bodyVolume": 81,
+					"innerBodyLength": 22,
+					"innerBodyWidth": 2,
+					"innerBodyHeight": 2,
 
-				"adr1": false,
-				"adr2": false,
-				"adr3": false,
-				"adr4": false,
-				"adr5": false,
-				"adr6": false,
-				"adr7": false,
-				"adr8": false,
-				"adr9": false,
-				"tir": true,
-				"ekmt": false
-			},
-			{
-				"truckId": 3,
-				"trailerType": 3,
-				"carBodyType": 3,
-				"loadingType": [3, 4]
+					"hasLtl": true,
+					"hasLiftgate": false,
+					"hasStanchionTrailer": false,
+					"carryingCapacity": 50,
+
+					"adr1": false,
+					"adr2": false,
+					"adr3": false,
+					"adr4": false,
+					"adr5": false,
+					"adr6": false,
+					"adr7": false,
+					"adr8": false,
+					"adr9": false,
+					"tir": true,
+					"ekmt": false
+				}
 			}
 		]
 	}

@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useEffect, useState } from "react";
-import { SearchRequest } from "../../models/search/Search";
+import { DriverDto, SearchRequest } from "../../models/search/Search";
 import { useLazySearchTrucksQuery } from "../../store/rtkQuery/searchApi";
 import { Moment } from "moment";
 import moment from "moment";
@@ -32,7 +32,6 @@ import {
 	LOADING_TYPE_DISPLAY_NAME_ARRAY,
 	LOADING_TYPE_DISPLAY_NAME_MAP,
 } from "../../models/truck/toDisplayNameMappers/LoadingTypeToDisplayNameMap";
-import { ITruck } from "../../models/truck/truck";
 import TrucksTable from "./trucks/TrucksTable";
 
 export interface ISelectItem {
@@ -44,7 +43,7 @@ const SearchTruckTab = () => {
 	const [trigger, { data: searchResponse }] = useLazySearchTrucksQuery();
 
 	const [loadingPlace, setLoadingPlace] = useState<string>("");
-	const [trucks, setTrucks] = useState<ITruck[]>(searchResponse?.trucks ?? []);
+	const [drivers, setDrivers] = useState<DriverDto[]>(searchResponse?.drivers ?? []);
 	const [loadingDateFrom, setLoadingDateFrom] = useState<Moment | null>(moment());
 	const [isFiltredExpanded, setIsFiltredExpanded] = useState<boolean>(false);
 	const [weightMin, setWeightMin] = useState<number>();
@@ -104,61 +103,65 @@ const SearchTruckTab = () => {
 		setIsDangerous(false);
 		setIsTir(false);
 		setIsEkmt(false);
-		setTrucks(searchResponse?.trucks ?? []);
+		setDrivers(searchResponse?.drivers ?? []);
 	};
 
 	const applyFiltersHandler = () => {
-		if (!searchResponse || searchResponse.trucks?.length === 0) {
-			setTrucks([]);
+		if (!searchResponse || searchResponse.drivers?.length === 0) {
+			setDrivers([]);
 			return;
 		}
 
-		let filtredTransportations = searchResponse.trucks.filter((o) => {
-			if ((weightMin || weightMax) && !o.carryingCapacity) return;
-			if (weightMin && weightMin > o.carryingCapacity) return;
-			if (weightMax && weightMax < o.carryingCapacity) return;
-			if ((volumeMin || volumeMax) && !o.bodyVolume) return;
-			if (volumeMin && volumeMin > o.bodyVolume) return;
-			if (volumeMax && volumeMax < o.bodyVolume) return;
-			if (!o.innerBodyLength && (lengthMin || lengthMax)) return;
-			if (o.innerBodyLength && lengthMin && lengthMin > o.innerBodyLength) return;
-			if (o.innerBodyLength && lengthMax && lengthMax < o.innerBodyLength) return;
-			if (!o.innerBodyWidth && (widthMin || widthMax)) return;
-			if (o.innerBodyWidth && widthMin && widthMin > o.innerBodyWidth) return;
-			if (o.innerBodyWidth && widthMax && widthMax < o.innerBodyWidth) return;
-			if (!o.innerBodyHeight && (heightMin || heightMax)) return;
-			if (o.innerBodyHeight && heightMin && heightMin > o.innerBodyHeight) return;
-			if (o.innerBodyHeight && heightMax && heightMax < o.innerBodyHeight) return;
-			if (hasLtl && !o.hasLtl) return;
-			if (hasLiftgate && !o.hasLiftgate) return;
-			if (hasStanchionTrailer && !o.hasStanchionTrailer) return;
-			if (isTir && !o.tir) return;
-			if (isEkmt && !o.ekmt) return;
+		let filtredTransportations = searchResponse.drivers.filter((o) => {
+			if ((weightMin || weightMax) && !o.truck.carryingCapacity) return;
+			if (weightMin && weightMin > o.truck.carryingCapacity) return;
+			if (weightMax && weightMax < o.truck.carryingCapacity) return;
+			if ((volumeMin || volumeMax) && !o.truck.bodyVolume) return;
+			if (volumeMin && volumeMin > o.truck.bodyVolume) return;
+			if (volumeMax && volumeMax < o.truck.bodyVolume) return;
+			if (!o.truck.innerBodyLength && (lengthMin || lengthMax)) return;
+			if (o.truck.innerBodyLength && lengthMin && lengthMin > o.truck.innerBodyLength) return;
+			if (o.truck.innerBodyLength && lengthMax && lengthMax < o.truck.innerBodyLength) return;
+			if (!o.truck.innerBodyWidth && (widthMin || widthMax)) return;
+			if (o.truck.innerBodyWidth && widthMin && widthMin > o.truck.innerBodyWidth) return;
+			if (o.truck.innerBodyWidth && widthMax && widthMax < o.truck.innerBodyWidth) return;
+			if (!o.truck.innerBodyHeight && (heightMin || heightMax)) return;
+			if (o.truck.innerBodyHeight && heightMin && heightMin > o.truck.innerBodyHeight) return;
+			if (o.truck.innerBodyHeight && heightMax && heightMax < o.truck.innerBodyHeight) return;
+			if (hasLtl && !o.truck.hasLtl) return;
+			if (hasLiftgate && !o.truck.hasLiftgate) return;
+			if (hasStanchionTrailer && !o.truck.hasStanchionTrailer) return;
+			if (isTir && !o.truck.tir) return;
+			if (isEkmt && !o.truck.ekmt) return;
 			if (
 				isDangerous &&
-				!o.adr1 &&
-				!o.adr2 &&
-				!o.adr3 &&
-				!o.adr4 &&
-				!o.adr5 &&
-				!o.adr6 &&
-				!o.adr7 &&
-				!o.adr8 &&
-				!o.adr9
+				!o.truck.adr1 &&
+				!o.truck.adr2 &&
+				!o.truck.adr3 &&
+				!o.truck.adr4 &&
+				!o.truck.adr5 &&
+				!o.truck.adr6 &&
+				!o.truck.adr7 &&
+				!o.truck.adr8 &&
+				!o.truck.adr9
 			) {
 				return;
 			}
 
-			if (truckBodies.length > 0 && !o.carBodyType) return;
-			if (truckBodies.length > 0 && (o.carBodyType || o.carBodyType === 0) && !truckBodies.includes(o.carBodyType)) {
+			if (truckBodies.length > 0 && !o.truck.carBodyType) return;
+			if (
+				truckBodies.length > 0 &&
+				(o.truck.carBodyType || o.truck.carBodyType === 0) &&
+				!truckBodies.includes(o.truck.carBodyType)
+			) {
 				return;
 			}
 
-			if (loadingTypes.length > 0 && !o.loadingType) return;
+			if (loadingTypes.length > 0 && !o.truck.loadingType) return;
 			if (
 				loadingTypes.length > 0 &&
-				(o.loadingType || o.loadingType === 0) &&
-				loadingTypes.filter((x) => o.loadingType?.includes(x)).length === 0
+				(o.truck.loadingType || o.truck.loadingType === 0) &&
+				loadingTypes.filter((x) => o.truck.loadingType?.includes(x)).length === 0
 			) {
 				return;
 			}
@@ -166,7 +169,7 @@ const SearchTruckTab = () => {
 			return true;
 		});
 
-		setTrucks(filtredTransportations);
+		setDrivers(filtredTransportations);
 	};
 
 	const searchHandler = async () => {
@@ -189,7 +192,7 @@ const SearchTruckTab = () => {
 
 		const result = await trigger(searchRequest);
 		if (result.isSuccess) {
-			setTrucks(result.data?.trucks ?? []);
+			setDrivers(result.data?.drivers ?? []);
 		}
 	};
 
@@ -492,7 +495,7 @@ const SearchTruckTab = () => {
 				</Grid>
 			)}
 			<Box my={2}>
-				<TrucksTable trucks={trucks} />
+				<TrucksTable drivers={drivers} />
 			</Box>
 		</Box>
 	);

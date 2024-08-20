@@ -36,8 +36,8 @@ export const orderToOrderDataItemsConverter = (
 		},
 		{
 			parameterName: "Статус пользователя",
-			shipperParameter: personStatusToDisplayStringConverter(shipper?.approvementStatus),
-			driverParameter: personStatusToDisplayStringConverter(driver?.approvementStatus),
+			shipperParameter: personStatusToDisplayStringConverter(shipper?.status),
+			driverParameter: personStatusToDisplayStringConverter(driver?.status),
 		},
 		{
 			parameterName: "Вес / Грузоподъемность, т",

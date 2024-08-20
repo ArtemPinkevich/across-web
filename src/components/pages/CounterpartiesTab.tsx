@@ -10,7 +10,7 @@ import {
 import { useIntl } from "react-intl";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLazyGetPersonsQuery } from "../../store/rtkQuery/persons";
+import { useLazyGetPersonsQuery } from "../../store/rtkQuery/personsApi";
 import CounterpartiesFilters from "./counterparties/CounterpartiesFilters";
 import { IProfile, PersonRole, PersonStatus } from "../../models/persons/personModels";
 
@@ -40,7 +40,7 @@ const CounterpartiesTab = () => {
 		{
 			field: "role",
 			headerName: intl.formatMessage({ id: "role" }),
-			width: 100,
+			width: 150,
 			valueGetter: (_, row) => (row.role === PersonRole.SHIPPER ? "Грузоотправитель" : "Перевозчик"),
 		},
 		{
@@ -53,15 +53,15 @@ const CounterpartiesTab = () => {
 			headerName: intl.formatMessage({ id: "status" }),
 			width: 250,
 			renderCell: (params) => {
-				if (params.row.approvementStatus === PersonStatus.DOCUMENTS_MISSING) {
+				if (!params.row.status || params.row.status === PersonStatus.DOCUMENTS_MISSING) {
 					return <Chip size="small" color={"default"} label={"Документы отсутствуют"} />;
 				}
 
-				if (params.row.approvementStatus === PersonStatus.CONFIRMED) {
+				if (params.row.status === PersonStatus.CONFIRMED) {
 					return <Chip size="small" color={"success"} label={"Подтверждена"} />;
 				}
 
-				if (params.row.approvementStatus === PersonStatus.UNCONFIRMED) {
+				if (params.row.status === PersonStatus.UNCONFIRMED) {
 					return <Chip size="small" color={"error"} label={"Не подтверждена"} />;
 				}
 			},
@@ -82,7 +82,7 @@ const CounterpartiesTab = () => {
 			newFiltredPersons = newFiltredPersons.filter((o) => o.role === role);
 		}
 		if (status !== PersonStatus.NONE) {
-			newFiltredPersons = newFiltredPersons.filter((o) => o.approvementStatus === status);
+			newFiltredPersons = newFiltredPersons.filter((o) => o.status === status);
 		}
 
 		setFiltredPersons(newFiltredPersons);

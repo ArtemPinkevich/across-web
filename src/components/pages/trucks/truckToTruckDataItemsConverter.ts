@@ -26,7 +26,7 @@ export const truckToTruckDataItemsConverter = (truck: ITruck, driver?: IProfile)
 		},
 		{
 			parameterName: "Статус пользователя",
-			value: personStatusToDisplayStringConverter(driver?.approvementStatus),
+			value: personStatusToDisplayStringConverter(driver?.status),
 		},
 		{
 			parameterName: "Тип кузова",

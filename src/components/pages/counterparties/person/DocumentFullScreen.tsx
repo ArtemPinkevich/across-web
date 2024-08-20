@@ -29,7 +29,13 @@ const DocumentFullScreenDialog = (props: DocumentFullScreenProps) => {
 			</AppBar>
 
 			<Box>
-				<img src={imgSrc} />
+				<Box
+					component="img"
+					sx={{
+						maxWidth: "100%",
+					}}
+					src={imgSrc}
+				/>
 			</Box>
 		</Dialog>
 	);
