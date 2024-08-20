@@ -23,11 +23,22 @@ export const orderToOrderDataItemsConverter = (
 
 	if (!cargo) return items;
 
+	let packagingQuantityDisplay = "";
+	if (
+		cargo.packagingType !== PackagingType.inBulk &&
+		cargo.packagingType !== PackagingType.loose &&
+		cargo.packagingType !== PackagingType.none
+	) {
+		if (cargo.packagingQuantity) {
+			packagingQuantityDisplay = `(${cargo.packagingQuantity} шт)`;
+		}
+	}
+
 	items.push(
 		{
 			parameterName: "ФИО",
-			shipperParameter: shipper ? `${shipper.surname} ${shipper.name} ${shipper.patronymic}` : "—",
-			driverParameter: driver ? `${driver.surname} ${driver.name} ${driver.patronymic}` : "—",
+			shipperParameter: shipper ? `${shipper.surname ?? ""} ${shipper.name ?? ""} ${shipper.patronymic ?? ""}` : "—",
+			driverParameter: driver ? `${driver.surname ?? ""} ${driver.name ?? ""} ${driver.patronymic ?? ""}` : "—",
 		},
 		{
 			parameterName: "Телефон",
@@ -66,22 +77,22 @@ export const orderToOrderDataItemsConverter = (
 		},
 		{
 			parameterName: "Упаковка",
-			shipperParameter: `${PACKAGING_TYPE_DISPLAY_NAME_MAP.get(cargo.packagingType)}${cargo.packagingType !== PackagingType.inBulk && cargo.packagingType !== PackagingType.loose && cargo.packagingType !== PackagingType.none ? " (" + cargo.packagingQuantity + " шт)" : ""}`,
+			shipperParameter: `${PACKAGING_TYPE_DISPLAY_NAME_MAP.get(cargo.packagingType)} ${packagingQuantityDisplay}`,
 			driverParameter: "—",
 		},
 		{
 			parameterName: "Длина",
-			shipperParameter: `${cargo.length}`,
+			shipperParameter: `${cargo.length ?? ""}`,
 			driverParameter: `${truck?.innerBodyLength ?? ""}`,
 		},
 		{
 			parameterName: "Ширина",
-			shipperParameter: `${cargo.width}`,
+			shipperParameter: `${cargo.width ?? ""}`,
 			driverParameter: `${truck?.innerBodyWidth ?? ""}`,
 		},
 		{
 			parameterName: "Высота",
-			shipperParameter: `${cargo.height}`,
+			shipperParameter: `${cargo.height ?? ""}`,
 			driverParameter: `${truck?.innerBodyHeight ?? ""}`,
 		},
 		{

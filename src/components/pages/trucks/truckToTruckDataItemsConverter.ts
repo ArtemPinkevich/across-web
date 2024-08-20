@@ -18,7 +18,7 @@ export const truckToTruckDataItemsConverter = (truck: ITruck, driver?: IProfile)
 	items.push(
 		{
 			parameterName: "ФИО",
-			value: driver ? `${driver.surname} ${driver.name} ${driver.patronymic}` : "—",
+			value: driver ? `${driver.surname ?? ""} ${driver.name ?? ""} ${driver.patronymic ?? ""}` : "—",
 		},
 		{
 			parameterName: "Телефон",

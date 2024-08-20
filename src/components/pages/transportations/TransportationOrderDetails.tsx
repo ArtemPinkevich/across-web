@@ -1,10 +1,11 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useParams } from "react-router-dom";
-import { useGetOrderQuery } from "../../../store/rtkQuery/ordersApi";
+import { useGetOrderByIdQuery } from "../../../store/rtkQuery/ordersApi";
 import { orderToOrderDataItemsConverter } from "./orderToOrderDataItemsConverter";
-import { useGetShipperQuery } from "../../../store/rtkQuery/profileApi";
 import TransportationGeneralInfo from "./TransportationGeneralInfo";
+import { ITransportation } from "../../../models/orders/orderModels";
+import { useSearchShipperByOrderIdQuery } from "../../../store/rtkQuery/searchApi";
 
 const errorComponent = (
 	<Box m="20px">
@@ -16,18 +17,20 @@ const errorComponent = (
 
 const TransportationOrderDetails = () => {
 	let params = useParams();
-	let paramId: number | undefined = params.id ? +params.id : undefined;
+	let orderId: number | undefined = params.id ? +params.id : undefined;
 
-	if (!paramId && paramId !== 0) {
+	if (!orderId && orderId !== 0) {
 		return errorComponent;
 	}
 
-	const { data: order } = useGetOrderQuery(paramId);
-	const { data: shipper } = useGetShipperQuery(paramId);
+	const { data: orderResponce } = useGetOrderByIdQuery(orderId);
+	const { data: shipper } = useSearchShipperByOrderIdQuery(orderId);
 
-	if (!order) {
+	if (!orderResponce || orderResponce.transportationOrderDtos?.length <= 0) {
 		return errorComponent;
 	}
+
+	const order: ITransportation = orderResponce.transportationOrderDtos[0];
 
 	const dataItems = orderToOrderDataItemsConverter(order.cargo, shipper);
 

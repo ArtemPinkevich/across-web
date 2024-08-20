@@ -38,3 +38,14 @@ export interface ITransferInfo {
 	// UnloadingTimeFrom: string;            // Строка формата TimeOnly, например "08:00"
 	// UnloadingTimeTo: string;
 }
+
+export interface ITransportationResult {
+	result: TransportationOrderResult;
+	transportationOrderDtos: ITransportation[];
+}
+
+export interface TransportationOrderResult {
+	transportationId?: number;
+	result: ApiCommonResult;
+	reasons: string[];
+}

@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL, JSON_SERVER_URL } from "../../models/constants";
-import { IChangeDocumentStatusRequest, IProfile } from "../../models/persons/personModels";
-import { DefaultResponse } from "../../models/commonApi";
+import { IProfile } from "../../models/persons/personModels";
 
 // Base server
 // const USED_BASE_URL = BASE_URL
@@ -21,21 +20,7 @@ export const profileApi = createApi({
 			query: () => ({ url: GET_PROFILE_URL }),
 			providesTags: ["Profile"],
 		}),
-
-		// getShipper: build.query<IProfile, number>({
-		// 	query: (transportationId) => ({ url: `/get_profile/${transportationId}`, data: transportationId }),
-		// }),
-		getShipper: build.query<IProfile, number>({
-			query: (transportationId) => ({ url: `/get_profile` }),
-		}),
-
-		// getDriver: build.query<IProfile, number>({
-		// 	query: (truckId) => ({ url: `/get_profile/${truckId}`, data: truckId }),
-		// }),
-		getDriver: build.query<IProfile, number>({
-			query: (truckId) => ({ url: `/get_profile` }),
-		}),
 	}),
 });
 
-export const { useGetProfileQuery, useGetShipperQuery, useGetDriverQuery } = profileApi;
+export const { useGetProfileQuery } = profileApi;

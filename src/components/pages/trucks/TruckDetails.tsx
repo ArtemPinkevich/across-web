@@ -1,9 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useParams } from "react-router-dom";
-import { useGetDriverQuery } from "../../../store/rtkQuery/profileApi";
-import { useGetTruckQuery } from "../../../store/rtkQuery/truckApi";
+import { useGetTruckByIdQuery } from "../../../store/rtkQuery/truckApi";
 import { truckToTruckDataItemsConverter } from "./truckToTruckDataItemsConverter";
+import { useSearchDriverByTruckIdQuery } from "../../../store/rtkQuery/searchApi";
 
 const errorComponent = (
 	<Box m="20px">
@@ -15,14 +15,14 @@ const errorComponent = (
 
 const TruckDetails = () => {
 	let params = useParams();
-	let paramId: number | undefined = params.id ? +params.id : undefined;
+	let truckId: number | undefined = params.id ? +params.id : undefined;
 
-	if (!paramId && paramId !== 0) {
+	if (!truckId && truckId !== 0) {
 		return errorComponent;
 	}
 
-	const { data: truck } = useGetTruckQuery();
-	const { data: driver } = useGetDriverQuery(paramId);
+	const { data: truck } = useGetTruckByIdQuery(truckId);
+	const { data: driver } = useSearchDriverByTruckIdQuery(truckId);
 
 	if (!truck) {
 		return errorComponent;

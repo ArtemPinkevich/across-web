@@ -273,7 +273,7 @@
 			}
 		]
 	},
-	"get_truck": {
+	"get_truck_by_id": {
 		"truckId": 0,
 		"trailerType": 0,
 		"carBodyType": 0,
@@ -411,7 +411,7 @@
 			}
 		]
 	},
-	"get_order": {
+	"get_order_by_id": {
 		"transportationOrderId": 0,
 		"transferInfo": {
 			"loadingDateFrom": "2024-08-05T15:18:14.912Z",

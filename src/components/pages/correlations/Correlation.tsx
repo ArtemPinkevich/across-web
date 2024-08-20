@@ -5,7 +5,6 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useParams } from "react-router-dom";
 import TransportationGeneralInfo from "../transportations/TransportationGeneralInfo";
 import { orderToOrderDataItemsConverter } from "../transportations/orderToOrderDataItemsConverter";
-import { useGetTruckQuery } from "../../../store/rtkQuery/truckApi";
 
 const errorComponent = (
 	<Box m="20px">
@@ -24,7 +23,7 @@ const Correlation = () => {
 	}
 
 	const { data: bidsResponse } = useGetBidsQuery();
-	const { data: truck } = useGetTruckQuery();
+	//const { data: truck } = useGetTruckQuery();
 
 	if (!bidsResponse || bidsResponse.result == ApiCommonResult.Error) {
 		return errorComponent;
