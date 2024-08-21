@@ -64,7 +64,11 @@ const SignInTab = () => {
 						</Button>
 					)}
 				</Box>
-				{error && <Typography color={"red"}>Неверный логин или пароль</Typography>}
+				{error && (
+					<Typography mt={1} color={"red"}>
+						Неверный логин или пароль
+					</Typography>
+				)}
 			</Paper>
 		</Box>
 	);

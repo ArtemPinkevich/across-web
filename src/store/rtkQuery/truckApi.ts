@@ -1,23 +1,17 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { BASE_URL } from "../../models/constants";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASE_SERVER_URL, JSON_SERVER_URL, USE_FAKE_SERVER } from "../../models/constants";
 import { ITruck } from "../../models/truck/truck";
 import { baseQueryWithToken } from "./baseQueryWithReauth";
 
-// Base server
-const USED_BASE_URL = BASE_URL;
-const GET_TRUCK_BY_ID_URL = "/Truck/get_truck_by_id";
-
-// json-server
-// const USED_BASE_URL = JSON_SERVER_URL;
-//const GET_TRUCK_BY_ID_URL = "/get_truck_by_id";
-
 export const truckApi = createApi({
 	reducerPath: "truckApi",
-	baseQuery: baseQueryWithToken(USED_BASE_URL),
+	baseQuery: USE_FAKE_SERVER
+		? fetchBaseQuery({ baseUrl: JSON_SERVER_URL })
+		: baseQueryWithToken(`${BASE_SERVER_URL}/Truck`),
 	endpoints: (build) => ({
 		getTruckById: build.query<ITruck, number>({
 			query: (truckId) => ({
-				url: `${GET_TRUCK_BY_ID_URL}/${truckId}`,
+				url: `/get_truck_by_id/${truckId}`,
 			}),
 		}),
 	}),

@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { BASE_URL } from "../models/constants";
+import { BASE_SERVER_URL } from "../models/constants";
 import { UserDocumentType } from "../models/persons/personModels";
 
 export const getImageFromBackend = async (documentType: UserDocumentType): Promise<string | undefined> => {
@@ -11,7 +11,7 @@ export const getImageFromBackend = async (documentType: UserDocumentType): Promi
 			responseType: "blob",
 		};
 
-		const response = await axios.get(`${BASE_URL}/File/get-image/${documentType}`, config);
+		const response = await axios.get(`${BASE_SERVER_URL}/File/get-image/${documentType}`, config);
 
 		if (response.status) {
 			const base64 = await convertBlobToBase64(response.data);

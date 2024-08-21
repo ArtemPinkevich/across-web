@@ -1,5 +1,5 @@
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
-import { useGetBidsQuery } from "../../../store/rtkQuery/ordersApi";
+import { useGetBidsQuery } from "../../../store/rtkQuery/searchApi";
 import { ApiCommonResult } from "../../../models/commonApi";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useParams } from "react-router-dom";
@@ -23,6 +23,8 @@ const Correlation = () => {
 	}
 
 	const { data: bidsResponse } = useGetBidsQuery();
+
+	// TODO здесь нужно, чтобы в correlation был грузовик
 	//const { data: truck } = useGetTruckQuery();
 
 	if (!bidsResponse || bidsResponse.result == ApiCommonResult.Error) {

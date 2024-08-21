@@ -96,7 +96,9 @@ const CounterpartiesTab = () => {
 				rows={filtredPersons}
 				columns={columns}
 				density="compact"
+				autoHeight
 				hideFooter
+				localeText={{ noRowsLabel: "" }}
 			/>
 		</Stack>
 	);

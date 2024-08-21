@@ -1,54 +1,48 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { BASE_URL, JSON_SERVER_URL } from "../../models/constants";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASE_SERVER_URL, JSON_SERVER_URL, USE_FAKE_SERVER } from "../../models/constants";
 import { SearchRequest, SearchResponse, SearchTrucksResponse } from "../../models/search/Search";
 import { IProfile } from "../../models/persons/personModels";
 import { baseQueryWithToken } from "./baseQueryWithReauth";
-
-// Base server
-const USED_BASE_URL = BASE_URL;
-const SEARCH_URL = "/Search/search";
-const SEARCH_TRUCKS_URL = "/Search/search_trucks";
-const SEARCH_SHIPPER_BY_ORDER_ID_URL = "/Search/search_shipper_by_order_id";
-const SEARCH_DRIVER_BY_TRUCK_ID_URL = "/Search/search_driver_by_truck_id";
-
-// json-server
-// const USED_BASE_URL = JSON_SERVER_URL;
-// const SEARCH_URL = "/search";
-// const SEARCH_TRUCKS_URL = "/search-trucks";
-//const SEARCH_SHIPPER_BY_ORDER_ID_URL = "/search_shipper_by_order_id";
+import { BidsResponse } from "../../models/orders/orderModels";
 
 export const searchApi = createApi({
 	reducerPath: "searchApi",
-	baseQuery: baseQueryWithToken(USED_BASE_URL),
+	baseQuery: USE_FAKE_SERVER
+		? fetchBaseQuery({ baseUrl: JSON_SERVER_URL })
+		: baseQueryWithToken(`${BASE_SERVER_URL}/Search`),
 	endpoints: (build) => ({
+		getBids: build.query<BidsResponse, void>({
+			query: () => ({ url: `/get_bids` }),
+		}),
 		searchTransportations: build.query<SearchResponse, SearchRequest>({
 			query: (searchRequest) => ({
-				url: `${SEARCH_URL}?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
+				url: `/search?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
 					searchRequest.loadingDate,
 				)}`,
 			}),
 		}),
 		searchTrucks: build.query<SearchTrucksResponse, SearchRequest>({
 			query: (searchRequest) => ({
-				url: `${SEARCH_TRUCKS_URL}?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
+				url: `search_trucks?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
 					searchRequest.loadingDate,
 				)}`,
 			}),
 		}),
 		searchShipperByOrderId: build.query<IProfile, number>({
 			query: (orderId) => ({
-				url: `${SEARCH_SHIPPER_BY_ORDER_ID_URL}/${orderId}`,
+				url: `/search_shipper_by_order_id/${orderId}`,
 			}),
 		}),
 		searchDriverByTruckId: build.query<IProfile, number>({
 			query: (truckId) => ({
-				url: `${SEARCH_DRIVER_BY_TRUCK_ID_URL}/${truckId}`,
+				url: `/search_driver_by_truck_id/${truckId}`,
 			}),
 		}),
 	}),
 });
 
 export const {
+	useGetBidsQuery,
 	useLazySearchTransportationsQuery,
 	useLazySearchTrucksQuery,
 	useSearchShipperByOrderIdQuery,

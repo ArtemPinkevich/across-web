@@ -9,6 +9,7 @@ import HeaderLite from "./components/global/header/HeaderLite";
 import Notification from "./components/global/Notification";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { USE_FAKE_SERVER } from "./models/constants";
 
 const App = () => {
 	const lang = useSelector((state: IRootState) => state.settings.localization);
@@ -23,7 +24,7 @@ const App = () => {
 					<Grid container height={"100%"}>
 						<Notification />
 						<Grid item xs={12}>
-							{isLogined && <HeaderLite />}
+							{(isLogined || USE_FAKE_SERVER) && <HeaderLite />}
 						</Grid>
 						<Grid item zeroMinWidth width={"100%"}>
 							<Box>

@@ -16,10 +16,32 @@ import { PersonRole } from "../../../models/persons/personModels";
 import SignInTab from "../../pages/SignInTab";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../../store/store";
+import { USE_FAKE_SERVER } from "../../../models/constants";
+
+const FULL_ROUTERS = (
+	<Routes>
+		<Route path="/" element={<CounterpartiesTab />} />
+		<Route path="/profile" element={<ProfileTab />} />
+		<Route path="/bids" element={<BidsTab />} />
+		<Route path="/matches" element={<MatchesTab />} />
+		<Route path="/search" element={<SearchCargoTab />} />
+		<Route path="/searchTruck" element={<SearchTruckTab />} />
+		<Route path="/in-progress" element={<AtWorkTab />} />
+		<Route path="/correlations/:id" element={<Correlation />} />
+		<Route path="/transportations/:id" element={<TransportationOrderDetails />} />
+		<Route path="/trucks/:id" element={<TruckDetails />} />
+		<Route path="/sign-in" element={<SignInTab />} />
+		<Route path="/counterparties" element={<CounterpartiesTab />} />
+		<Route path="/counterparties/:id" element={<Person person={undefined} />} />
+		{/* TODO переделать person={undefined} ибо undefined оно как бы и нахрен не надо :) */}
+	</Routes>
+);
 
 const JuristRoutes = () => {
 	const counterpartiesMatch = useMatch("/counterparties/:id");
 	const isLogined = useSelector((state: IRootState) => state.auth.isLogined);
+
+	// Перенести запросы, так как ломается хэдер при негативном ответе
 	const { data: profile } = useGetProfileQuery();
 	const { data } = useGetPersonsQuery();
 	const persons = data ?? [];
@@ -28,6 +50,10 @@ const JuristRoutes = () => {
 		? persons.find((person) => person.id === counterpartiesMatch.params.id)
 		: null;
 
+	if (USE_FAKE_SERVER) {
+		return FULL_ROUTERS;
+	}
+
 	if (!isLogined) {
 		return (
 			<Routes>
@@ -35,6 +61,10 @@ const JuristRoutes = () => {
 				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
 		);
+	}
+
+	if (profile?.role === PersonRole.OWNER) {
+		return FULL_ROUTERS;
 	}
 
 	if (profile?.role === PersonRole.LAWYER) {

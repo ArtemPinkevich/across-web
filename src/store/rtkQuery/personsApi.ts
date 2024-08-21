@@ -1,33 +1,25 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { BASE_URL, JSON_SERVER_URL } from "../../models/constants";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASE_SERVER_URL, JSON_SERVER_URL, USE_FAKE_SERVER } from "../../models/constants";
 import { IChangeDocumentStatusRequest, IChangePersonStatusRequest, IProfile } from "../../models/persons/personModels";
 import { DefaultResponse } from "../../models/commonApi";
 import { baseQueryWithToken } from "./baseQueryWithReauth";
 
-// Base server
-const USED_BASE_URL = BASE_URL;
-const GET_PERSONS_URL = "/Profiles/get_shippers_and_drivers";
-const CHANGE_DOC_STATUS_URL = "/Profiles/change_doc_status";
-const CHANGE_PERSON_STATUS_URL = "/Profiles/change_person_status";
-
-// json-server
-// const USED_BASE_URL = JSON_SERVER_URL;
-// const GET_PERSONS_URL = "/get_shippers_and_drivers";
-
 export const personApi = createApi({
 	reducerPath: "persons",
-	baseQuery: baseQueryWithToken(USED_BASE_URL),
+	baseQuery: USE_FAKE_SERVER
+		? fetchBaseQuery({ baseUrl: JSON_SERVER_URL })
+		: baseQueryWithToken(`${BASE_SERVER_URL}/Profiles`),
 	tagTypes: ["Persons"],
 	// refetchOnFocus: true,
 	// refetchOnReconnect: true,
 	endpoints: (builder) => ({
 		getPersons: builder.query<IProfile[], void>({
-			query: () => ({ url: GET_PERSONS_URL }),
+			query: () => ({ url: "/get_shippers_and_drivers" }),
 			providesTags: ["Persons"],
 		}),
 		changeDocStatus: builder.mutation<DefaultResponse, IChangeDocumentStatusRequest>({
 			query: (body) => ({
-				url: CHANGE_DOC_STATUS_URL,
+				url: "/change_doc_status",
 				method: "POST",
 				body,
 			}),
@@ -35,7 +27,7 @@ export const personApi = createApi({
 		}),
 		changePersonStatus: builder.mutation<DefaultResponse, IChangePersonStatusRequest>({
 			query: (body) => ({
-				url: CHANGE_PERSON_STATUS_URL,
+				url: "/change_person_status",
 				method: "POST",
 				body,
 			}),

@@ -274,6 +274,7 @@
 		]
 	},
 	"get_truck_by_id": {
+		"id": 1,
 		"truckId": 0,
 		"trailerType": 0,
 		"carBodyType": 0,
@@ -456,7 +457,7 @@
 		},
 		"transportationStatus": 1
 	},
-	"search-trucks": {
+	"search_trucks": {
 		"result": 0,
 		"reasons": [],
 		"drivers": [
@@ -526,5 +527,16 @@
 				}
 			}
 		]
+	},
+	"search_shipper_by_order_id": {
+		"id": "4bd64e27-cb7f-41b7-9a48-52a0bc3cd3bf",
+		"name": "Дима",
+		"surname": "Отец дяди Фёдора",
+		"patronymic": "",
+		"birthDate": "02.02.1904",
+		"phoneNumber": "+72222222222",
+		"email": "permyakov@permyakov.ru",
+		"role": "Shipper",
+		"approvementStatus": "DocumentsMissing"
 	}
 }

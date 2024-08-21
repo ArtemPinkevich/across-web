@@ -42,6 +42,19 @@ export default function HeaderLite() {
 						</Box>
 					)}
 
+					{profile?.role === PersonRole.OWNER && (
+						<Box sx={{ flexGrow: 1, display: "flex" }}>
+							<Tabs value={selectedTab} onChange={(_, newValue) => setSelectedTab(newValue)}>
+								<Tab label={intl.formatMessage({ id: "counterparties" })} component={Link} to={"/counterparties"} />
+								<Tab label="Заявки" component={Link} to={"/bids"} />
+								<Tab label="Подборки" component={Link} to={"/matches"} />
+								<Tab label="Поиск груза" component={Link} to={"/search"} />
+								<Tab label="Поиск машин" component={Link} to={"/searchTruck"} />
+								<Tab label="В работе" component={Link} to={"/in-progress"} />
+							</Tabs>
+						</Box>
+					)}
+
 					<Box sx={{ flexGrow: 0 }}>
 						<HeaderRightSide />
 					</Box>
