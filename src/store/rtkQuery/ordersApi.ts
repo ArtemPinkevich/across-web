@@ -1,6 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../../models/constants";
 import { BidsResponse, ITransportationResult } from "../../models/orders/orderModels";
+import { baseQueryWithToken } from "./baseQueryWithReauth";
 
 // Base server
 const USED_BASE_URL = BASE_URL;
@@ -12,7 +13,7 @@ const GET_ORDER_BY_ID_URL = "/TransportationOrder/get_order_by_id";
 
 export const ordersApi = createApi({
 	reducerPath: "ordersApi",
-	baseQuery: fetchBaseQuery({ baseUrl: USED_BASE_URL }),
+	baseQuery: baseQueryWithToken(USED_BASE_URL),
 	refetchOnMountOrArgChange: true,
 	endpoints: (build) => ({
 		getBids: build.query<BidsResponse, void>({

@@ -12,6 +12,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 const App = () => {
 	const lang = useSelector((state: IRootState) => state.settings.localization);
+	const isLogined = useSelector((state: IRootState) => state.auth.isLogined);
 	const theme = useMode();
 
 	return (
@@ -22,7 +23,7 @@ const App = () => {
 					<Grid container height={"100%"}>
 						<Notification />
 						<Grid item xs={12}>
-							<HeaderLite />
+							{isLogined && <HeaderLite />}
 						</Grid>
 						<Grid item zeroMinWidth width={"100%"}>
 							<Box>

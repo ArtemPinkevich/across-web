@@ -1,7 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { BASE_URL, JSON_SERVER_URL } from "../../models/constants";
 import { IChangeDocumentStatusRequest, IChangePersonStatusRequest, IProfile } from "../../models/persons/personModels";
 import { DefaultResponse } from "../../models/commonApi";
+import { baseQueryWithToken } from "./baseQueryWithReauth";
 
 // Base server
 const USED_BASE_URL = BASE_URL;
@@ -15,7 +16,7 @@ const CHANGE_PERSON_STATUS_URL = "/Profiles/change_person_status";
 
 export const personApi = createApi({
 	reducerPath: "persons",
-	baseQuery: fetchBaseQuery({ baseUrl: USED_BASE_URL }),
+	baseQuery: baseQueryWithToken(USED_BASE_URL),
 	tagTypes: ["Persons"],
 	// refetchOnFocus: true,
 	// refetchOnReconnect: true,

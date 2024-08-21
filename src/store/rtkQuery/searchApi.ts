@@ -1,7 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { BASE_URL, JSON_SERVER_URL } from "../../models/constants";
 import { SearchRequest, SearchResponse, SearchTrucksResponse } from "../../models/search/Search";
 import { IProfile } from "../../models/persons/personModels";
+import { baseQueryWithToken } from "./baseQueryWithReauth";
 
 // Base server
 const USED_BASE_URL = BASE_URL;
@@ -18,7 +19,7 @@ const SEARCH_DRIVER_BY_TRUCK_ID_URL = "/Search/search_driver_by_truck_id";
 
 export const searchApi = createApi({
 	reducerPath: "searchApi",
-	baseQuery: fetchBaseQuery({ baseUrl: `${USED_BASE_URL}` }),
+	baseQuery: baseQueryWithToken(USED_BASE_URL),
 	endpoints: (build) => ({
 		searchTransportations: build.query<SearchResponse, SearchRequest>({
 			query: (searchRequest) => ({

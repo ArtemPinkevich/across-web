@@ -1,5 +1,6 @@
+import React from "react";
 import { PaletteMode, Tooltip } from "@mui/material";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -9,7 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../store/store";
 import { FormattedMessage } from "react-intl";
 import { setSettings } from "../../../store/slices/settingsSlice";
-import React from "react";
+import { LocalStorageKeys, saveInLocalStorage } from "../../../services/LocalStorageService";
+import { setIsLogined } from "../../../store/slices/authSlice";
 
 export default function HeaderRightSide() {
 	const dispatch = useDispatch();
@@ -35,6 +37,11 @@ export default function HeaderRightSide() {
 		);
 	};
 
+	const handleOnLogout = () => {
+		saveInLocalStorage(LocalStorageKeys.accessToken, "");
+		dispatch(setIsLogined(false));
+	};
+
 	return (
 		<React.Fragment>
 			<IconButton onClick={() => handleOnChangeMode(isDarkTheme ? "light" : "dark")}>
@@ -53,8 +60,8 @@ export default function HeaderRightSide() {
 			</IconButton>
 
 			<Tooltip title="Выйти" sx={{ ml: 2 }}>
-				<IconButton>
-					<ExitToAppIcon />
+				<IconButton onClick={handleOnLogout}>
+					<LogoutIcon />
 				</IconButton>
 			</Tooltip>
 		</React.Fragment>
