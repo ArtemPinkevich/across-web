@@ -1,13 +1,14 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { BASE_SERVER_URL } from "../models/constants";
 import { UserDocumentType } from "../models/persons/personModels";
+import { getFromLocalStorage, LocalStorageKeys } from "./LocalStorageService";
 
 export const getImageFromBackend = async (documentType: UserDocumentType): Promise<string | undefined> => {
 	try {
-		//const accessToken = await JwtTokenService.getAccessToken();
+		const accessToken = await getFromLocalStorage(LocalStorageKeys.accessToken);
 		const config: AxiosRequestConfig = {
 			method: "GET",
-			//headers: { Authorization: `Bearer ${accessToken}` },
+			headers: { Authorization: `Bearer ${accessToken}` },
 			responseType: "blob",
 		};
 
