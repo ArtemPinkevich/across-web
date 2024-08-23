@@ -12,7 +12,7 @@ const ProfileTab = () => {
 	}
 
 	return (
-		<Box m="20px">
+		<Box m="20px" maxWidth={800}>
 			<Paper elevation={3} sx={{ m: 3, p: 3 }}>
 				<Typography variant="h3" color={"GrayText"} fontFamily={"monospace"}>
 					Персональная информация

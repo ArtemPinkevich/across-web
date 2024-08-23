@@ -69,7 +69,7 @@ const Person = ({ person }: { person: IProfile | null | undefined }) => {
 	};
 
 	return (
-		<Box>
+		<Box maxWidth={800}>
 			<Paper elevation={3} sx={{ m: 3, p: 3 }}>
 				<Typography variant="h3" color={"GrayText"} fontFamily={"monospace"}>
 					Персональная информация
