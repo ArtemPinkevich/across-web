@@ -32,7 +32,7 @@ export interface ITruck extends IDangerousGoods, ITruckBase {
     regNumber: string,  // Нужно ли ???
 
     trailerType?: TrailerType,      // Тип прицепа
-    carBodyType?: CarBodyType,          // Кузов
+    carBodyType?: CarBodyType,      // Кузов
     loadingType?: LoadingType[],    // Тип загрузки
 
     bodyVolume: number,             // объем кузова, m3 (макс. 9999)

@@ -63,7 +63,7 @@ export const orderToOrderDataItemsConverter = (
 		{
 			parameterName: "Кузов",
 			shipperParameter: `${cargo.truckRequirements.carBodies.map((o) => CARBODY_DISPLAY_NAME_MAP.get(o)).join(", ")}`,
-			driverParameter: `${truck?.carBodyType ? CARBODY_DISPLAY_NAME_MAP.get(truck.carBodyType) : ""}`,
+			driverParameter: `${truck?.carBodyType || truck?.carBodyType === 0 ? CARBODY_DISPLAY_NAME_MAP.get(truck.carBodyType) : ""}`,
 		},
 		{
 			parameterName: "Тип загрузки",

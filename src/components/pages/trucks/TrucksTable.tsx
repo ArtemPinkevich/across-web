@@ -26,7 +26,10 @@ const TrucksTable = (props: Props) => {
 			headerName: "Тип кузова",
 			sortable: true,
 			width: 150,
-			valueGetter: (_, row) => (row.truck.carBodyType ? CARBODY_DISPLAY_NAME_MAP.get(row.truck.carBodyType) : "—"),
+			valueGetter: (_, row) =>
+				row.truck.carBodyType || row.truck.carBodyType === 0
+					? CARBODY_DISPLAY_NAME_MAP.get(row.truck.carBodyType)
+					: "—",
 		},
 		{
 			field: "weight",
