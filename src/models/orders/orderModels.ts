@@ -51,3 +51,8 @@ export interface TransportationOrderResult {
 	result: ApiCommonResult;
 	reasons: string[];
 }
+
+export interface IAssignTruckRequest {
+	truckId?: number;
+	transportationOrderId?: number;
+}

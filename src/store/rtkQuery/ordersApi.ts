@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_SERVER_URL, JSON_SERVER_URL, USE_FAKE_SERVER } from "../../models/constants";
-import { ITransportationResult } from "../../models/orders/orderModels";
+import { IAssignTruckRequest, ITransportationResult, TransportationOrderResult } from "../../models/orders/orderModels";
 import { baseQueryWithToken } from "./baseQueryWithReauth";
 
 export const ordersApi = createApi({
@@ -15,7 +15,14 @@ export const ordersApi = createApi({
 				url: `/get_order_by_id/${orderId}`,
 			}),
 		}),
+		assignTruck: build.mutation<TransportationOrderResult, IAssignTruckRequest>({
+			query: (body) => ({
+				url: "/assign_truck",
+				method: "POST",
+				body,
+			}),
+		}),
 	}),
 });
 
-export const { useGetOrderByIdQuery } = ordersApi;
+export const { useGetOrderByIdQuery, useAssignTruckMutation } = ordersApi;
