@@ -24,24 +24,21 @@ const Correlation = () => {
 
 	const { data: bidsResponse } = useGetBidsQuery();
 
-	// TODO здесь нужно, чтобы в correlation был грузовик
-	//const { data: truck } = useGetTruckQuery();
-
 	if (!bidsResponse || bidsResponse.result == ApiCommonResult.Error) {
 		return errorComponent;
 	}
 
-	const correlation = bidsResponse.correlations.find((o) => o.transportation.transportationOrderId === paramId);
+	const correlation = bidsResponse.correlations.find((o) => o.transportationOrder.transportationOrderId === paramId);
 
 	if (!correlation) {
 		return errorComponent;
 	}
 
 	const dataItems = orderToOrderDataItemsConverter(
-		correlation.transportation.cargo,
+		correlation.transportationOrder.cargo,
 		correlation.shipper,
 		correlation.driver,
-		truck,
+		correlation.truck,
 	);
 
 	const columns: GridColDef<(typeof dataItems)[number]>[] = [
@@ -73,9 +70,9 @@ const Correlation = () => {
 		<Stack m={2} spacing={3}>
 			<Paper elevation={3} sx={{ p: 3 }}>
 				<TransportationGeneralInfo
-					transferInfo={correlation.transportation.transferInfo}
-					cargoName={correlation.transportation.cargo.name}
-					transportationStatus={correlation.transportation.transportationStatus}
+					transferInfo={correlation.transportationOrder.transferInfo}
+					cargoName={correlation.transportationOrder.cargo.name}
+					transportationStatus={correlation.transportationOrder.transportationStatus}
 				/>
 			</Paper>
 

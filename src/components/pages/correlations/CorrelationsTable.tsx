@@ -20,7 +20,7 @@ const CorrelationsTable = (props: Props) => {
 			headerName: "Груз",
 			sortable: true,
 			width: 150,
-			valueGetter: (_, row) => row.transportation.cargo.name,
+			valueGetter: (_, row) => row.transportationOrder.cargo.name,
 		},
 		{
 			field: "shipper",
@@ -38,19 +38,19 @@ const CorrelationsTable = (props: Props) => {
 			field: "from",
 			headerName: "Откуда",
 			width: 100,
-			valueGetter: (_, row) => placeToDisplayStringConverter(row.transportation.transferInfo.loadingPlace),
+			valueGetter: (_, row) => placeToDisplayStringConverter(row.transportationOrder.transferInfo.loadingPlace),
 		},
 		{
 			field: "to",
 			headerName: "Куда",
 			width: 100,
-			valueGetter: (_, row) => placeToDisplayStringConverter(row.transportation.transferInfo.unloadingPlace),
+			valueGetter: (_, row) => placeToDisplayStringConverter(row.transportationOrder.transferInfo.unloadingPlace),
 		},
 		{
 			field: "date",
 			headerName: "Когда",
 			width: 100,
-			valueGetter: (_, row) => row.transportation.transferInfo.loadingDateFrom,
+			valueGetter: (_, row) => row.transportationOrder.transferInfo.loadingDateFrom,
 		},
 		{
 			field: "driver",
@@ -69,7 +69,7 @@ const CorrelationsTable = (props: Props) => {
 			headerName: "Статус груза",
 			width: 100,
 			renderCell: (params) => {
-				if (params.row.transportation.transportationStatus === TransportationStatus.carrierFinding) {
+				if (params.row.transportationOrder.transportationStatus === TransportationStatus.carrierFinding) {
 					return <Chip size="small" color={"success"} label={"Свободен"} />;
 				}
 
@@ -77,7 +77,7 @@ const CorrelationsTable = (props: Props) => {
 					<Chip
 						size="small"
 						color={"default"}
-						label={TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP.get(params.row.transportation.transportationStatus)}
+						label={TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP.get(params.row.transportationOrder.transportationStatus)}
 					/>
 				);
 			},
@@ -88,7 +88,7 @@ const CorrelationsTable = (props: Props) => {
 		<DataGrid
 			onRowDoubleClick={(o) => navigate(`/correlations/${o.id}`)}
 			rows={correlations}
-			getRowId={(o) => o.transportation.transportationOrderId!}
+			getRowId={(o) => o.transportationOrder.transportationOrderId!}
 			columns={columns}
 			density="compact"
 			hideFooter

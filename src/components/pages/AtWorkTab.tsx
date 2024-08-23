@@ -14,7 +14,9 @@ const AtWorkTab = () => {
 		);
 	}
 
-	const correlations = bidsResponse.correlations.filter((o) => o.transportation.transportationOrderId !== undefined);
+	const correlations = bidsResponse.correlations.filter(
+		(o) => o.transportationOrder.transportationOrderId !== undefined,
+	);
 
 	return (
 		<Box m="20px">

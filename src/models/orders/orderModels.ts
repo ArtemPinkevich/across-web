@@ -2,6 +2,7 @@ import { ICargo } from "../cargo/ICargo";
 import { ApiCommonResult } from "../commonApi";
 import { IProfile } from "../persons/personModels";
 import { IPlace } from "../places/Places";
+import { ITruck } from "../truck/truck";
 import { TransportationStatus } from "./TransportationStatus";
 
 export interface BidsResponse {
@@ -13,7 +14,8 @@ export interface BidsResponse {
 export interface ICorrelation {
 	shipper: IProfile;
 	driver: IProfile;
-	transportation: ITransportation;
+	truck: ITruck;
+	transportationOrder: ITransportation;
 }
 
 export interface ITransportation {
