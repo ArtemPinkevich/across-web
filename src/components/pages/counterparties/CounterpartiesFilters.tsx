@@ -18,7 +18,7 @@ const CounterpartiesFilters = (props: Props) => {
 	};
 
 	const handleOnStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const newSelectedStatus = (event.target as HTMLInputElement).value as PersonStatus;
+		const newSelectedStatus = PersonStatus[PersonStatus[+event.target.value] as keyof typeof PersonStatus];
 		setSelectedStatus(newSelectedStatus);
 		props.onFiltersChange(selectedRole, newSelectedStatus);
 	};

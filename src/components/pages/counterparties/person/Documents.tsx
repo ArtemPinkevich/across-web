@@ -53,8 +53,11 @@ const Documents = (props: DocsProps) => {
 	}, []);
 
 	const getImageFromBackendAsync = async (document: IUserDocument) => {
-		if (document?.documentType && document.documentStatus != UserDocumentStatus.NONE) {
-			const base64 = await getImageFromBackend(document.documentType);
+		if (
+			(document?.documentType || document?.documentType === 0) &&
+			document.documentStatus != UserDocumentStatus.NONE
+		) {
+			const base64 = await getImageFromBackend(document.documentType, person.id);
 			if (base64) {
 				setDocumentImagesMap((prev) => new Map(prev.set(document.documentType, base64)));
 			}

@@ -3,7 +3,10 @@ import { BASE_SERVER_URL } from "../models/constants";
 import { UserDocumentType } from "../models/persons/personModels";
 import { getFromLocalStorage, LocalStorageKeys } from "./LocalStorageService";
 
-export const getImageFromBackend = async (documentType: UserDocumentType): Promise<string | undefined> => {
+export const getImageFromBackend = async (
+	documentType: UserDocumentType,
+	userId: string,
+): Promise<string | undefined> => {
 	try {
 		const accessToken = await getFromLocalStorage(LocalStorageKeys.accessToken);
 		const config: AxiosRequestConfig = {
@@ -12,7 +15,7 @@ export const getImageFromBackend = async (documentType: UserDocumentType): Promi
 			responseType: "blob",
 		};
 
-		const response = await axios.get(`${BASE_SERVER_URL}/File/get-image/${documentType}`, config);
+		const response = await axios.get(`${BASE_SERVER_URL}/File/get-image/${documentType}/${userId}`, config);
 
 		if (response.status) {
 			const base64 = await convertBlobToBase64(response.data);
