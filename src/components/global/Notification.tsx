@@ -1,33 +1,13 @@
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { useGetPersonsQuery } from "../../store/rtkQuery/personsApi";
 import { AlertTitle } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { IRootState } from "../../store/store";
-import { useEffect } from "react";
 import { setNotification } from "../../store/slices/notificationSlice";
-import { useIntl } from "react-intl";
 
 const Notification = () => {
 	const notification = useSelector((state: IRootState) => state.notification);
 	const dispatch = useDispatch();
-	const intl = useIntl();
-	const { isError, error } = useGetPersonsQuery();
-
-	useEffect(() => {
-		if (error !== undefined) {
-			dispatch(
-				setNotification({
-					state: "error",
-					message:
-						"error" in error
-							? `${error.error}`
-							: `${JSON.stringify("data" in error ? error.data : intl.formatMessage({ id: "unknownError" }))}`,
-					isActive: true,
-				}),
-			);
-		}
-	}, [isError]);
 
 	const handleOnClose = () => {
 		dispatch(setNotification({ ...notification, isActive: false }));
