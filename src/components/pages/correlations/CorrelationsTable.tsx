@@ -5,6 +5,7 @@ import { TransportationStatus } from "../../../models/orders/TransportationStatu
 import { TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP } from "../../../models/orders/TransportationStatusToDisplayNameMap";
 import { useNavigate } from "react-router-dom";
 import { ICorrelation } from "../../../models/orders/orderModels";
+import moment from "moment";
 
 export type Props = {
 	correlations: ICorrelation[];
@@ -50,7 +51,7 @@ const CorrelationsTable = (props: Props) => {
 			field: "date",
 			headerName: "Когда",
 			width: 100,
-			valueGetter: (_, row) => row.transportationOrder.transferInfo.loadingDateFrom,
+			valueGetter: (_, row) => moment(row.transportationOrder.transferInfo.loadingDateFrom).format("DD.MM.YYYY"),
 		},
 		{
 			field: "driver",
