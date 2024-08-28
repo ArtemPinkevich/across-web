@@ -17,6 +17,7 @@ import SignInTab from "../../pages/SignInTab";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../../store/store";
 import { USE_FAKE_SERVER } from "../../../models/constants";
+import CorrelationAtWork from "../../pages/correlations/CorrelationAtWork";
 
 const FULL_ROUTERS = (
 	<Routes>
@@ -90,6 +91,7 @@ const JuristRoutes = () => {
 				<Route path="/searchTruck" element={<SearchTruckTab />} />
 				<Route path="/in-progress" element={<AtWorkTab />} />
 				<Route path="/correlations/:id" element={<Correlation />} />
+				<Route path="/correlationAtwork/:id" element={<CorrelationAtWork />} />
 				<Route path="/transportations/:id" element={<TransportationOrderDetails />} />
 				<Route path="/trucks/:id" element={<TruckDetails />} />
 				<Route path="/sign-in" element={<SignInTab />} />

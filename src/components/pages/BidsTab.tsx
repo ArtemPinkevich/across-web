@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useGetBidsQuery } from "../../store/rtkQuery/searchApi";
 import { ApiCommonResult } from "../../models/commonApi";
 import CorrelationsTable from "./correlations/CorrelationsTable";
 
 const BidsTab = () => {
+	const navigate = useNavigate();
 	const { data: bidsResponse } = useGetBidsQuery();
 
 	if (!bidsResponse || bidsResponse.result == ApiCommonResult.Error) {
@@ -21,7 +23,10 @@ const BidsTab = () => {
 	return (
 		<Box m="20px">
 			{correlations?.length > 0 ? (
-				<CorrelationsTable correlations={correlations} />
+				<CorrelationsTable
+					correlations={correlations}
+					onRowDoubleClick={(o) => navigate(`/correlations/${o.transportationOrder.transportationOrderId}`)}
+				/>
 			) : (
 				<Typography>Заявок не найдено</Typography>
 			)}

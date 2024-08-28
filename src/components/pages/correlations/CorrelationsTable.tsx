@@ -9,10 +9,11 @@ import moment from "moment";
 
 export type Props = {
 	correlations: ICorrelation[];
+	onRowDoubleClick: (correlation: ICorrelation) => void;
 };
 
 const CorrelationsTable = (props: Props) => {
-	const { correlations } = props;
+	const { correlations, onRowDoubleClick } = props;
 	const navigate = useNavigate();
 
 	const columns: GridColDef<(typeof correlations)[number]>[] = [
@@ -87,7 +88,7 @@ const CorrelationsTable = (props: Props) => {
 
 	return (
 		<DataGrid
-			onRowDoubleClick={(o) => navigate(`/correlations/${o.id}`)}
+			onRowDoubleClick={(o) => onRowDoubleClick(o.row)}
 			rows={correlations}
 			getRowId={(o) => o.transportationOrder.transportationOrderId!}
 			columns={columns}

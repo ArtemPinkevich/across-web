@@ -1,12 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { ApiCommonResult } from "../../models/commonApi";
 import CorrelationsTable from "./correlations/CorrelationsTable";
-import { useGetBidsQuery } from "../../store/rtkQuery/searchApi";
+import { useGetOrdersInProgressQuery } from "../../store/rtkQuery/searchApi";
 
 const AtWorkTab = () => {
-	const { data: bidsResponse } = useGetBidsQuery();
+	const navigate = useNavigate();
+	const { data: response } = useGetOrdersInProgressQuery();
 
-	if (!bidsResponse || bidsResponse.result == ApiCommonResult.Error) {
+	if (!response || response.result === ApiCommonResult.Error) {
 		return (
 			<Box m="20px">
 				<Typography>Активных перевозок не найдено</Typography>
@@ -14,14 +16,16 @@ const AtWorkTab = () => {
 		);
 	}
 
-	const correlations = bidsResponse.correlations.filter(
-		(o) => o.transportationOrder.transportationOrderId !== undefined,
-	);
+	const correlations =
+		response.ordersInProgress?.filter((o) => o.transportationOrder?.transportationOrderId !== undefined) ?? [];
 
 	return (
 		<Box m="20px">
 			{correlations?.length > 0 ? (
-				<CorrelationsTable correlations={correlations} />
+				<CorrelationsTable
+					correlations={correlations}
+					onRowDoubleClick={(o) => navigate(`/correlationAtwork/${o.transportationOrder.transportationOrderId}`)}
+				/>
 			) : (
 				<Typography>Активных перевозок не найдено</Typography>
 			)}

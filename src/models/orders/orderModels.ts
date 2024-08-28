@@ -11,6 +11,12 @@ export interface BidsResponse {
 	correlations: ICorrelation[];
 }
 
+export interface OrdersInProgressResponse {
+	result: ApiCommonResult;
+	reasons: string[];
+	ordersInProgress: ICorrelation[];
+}
+
 export interface ICorrelation {
 	shipper: IProfile;
 	driver: IProfile;
