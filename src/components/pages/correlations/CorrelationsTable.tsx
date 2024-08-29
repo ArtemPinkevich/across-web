@@ -58,13 +58,13 @@ const CorrelationsTable = (props: Props) => {
 			field: "driver",
 			headerName: "Перевозчик",
 			width: 250,
-			valueGetter: (_, row) => `${row.driver.surname || ""} ${row.driver.name || ""} ${row.driver.patronymic || ""}`,
+			valueGetter: (_, row) => `${row.driver?.surname || ""} ${row.driver?.name || ""} ${row.driver?.patronymic || ""}`,
 		},
 		{
 			field: "driverPhone",
 			headerName: "Телефон перевозчика",
 			width: 100,
-			valueGetter: (_, row) => row.driver.phoneNumber,
+			valueGetter: (_, row) => row.driver?.phoneNumber || "",
 		},
 		{
 			field: "status",
