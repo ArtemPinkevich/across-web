@@ -163,7 +163,11 @@ const Documents = (props: DocsProps) => {
 			<DocumentFullScreenDialog
 				isOpen={documentDialogOpen}
 				title={fullscreenDocumentTitle}
-				imgSrc={fullscreenDocument?.documentType ? documentImagesMap.get(fullscreenDocument.documentType) ?? "" : ""}
+				imgSrc={
+					fullscreenDocument?.documentType || fullscreenDocument?.documentType === 0
+						? documentImagesMap.get(fullscreenDocument.documentType) ?? ""
+						: ""
+				}
 				//imgSrc="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
 				onClose={() => setDocumentDialogOpen(false)}
 			/>
