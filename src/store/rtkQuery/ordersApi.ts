@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_SERVER_URL, JSON_SERVER_URL, USE_FAKE_SERVER } from "../../models/constants";
-import { IAssignTruckRequest, ITransportationResult, TransportationOrderResult } from "../../models/orders/orderModels";
+import {
+	IAssignTruckRequest,
+	IStartShipperApprovingRequest,
+	ITransportationResult,
+	TransportationOrderResult,
+} from "../../models/orders/orderModels";
 import { baseQueryWithToken } from "./baseQueryWithReauth";
 
 export const ordersApi = createApi({
@@ -15,6 +20,13 @@ export const ordersApi = createApi({
 				url: `/get_order_by_id/${orderId}`,
 			}),
 		}),
+		startShipperApproving: build.mutation<TransportationOrderResult, IStartShipperApprovingRequest>({
+			query: (body) => ({
+				url: "/start_shipper_approving",
+				method: "POST",
+				body,
+			}),
+		}),
 		assignTruck: build.mutation<TransportationOrderResult, IAssignTruckRequest>({
 			query: (body) => ({
 				url: "/assign_truck",
@@ -22,7 +34,42 @@ export const ordersApi = createApi({
 				body,
 			}),
 		}),
+		informArrivalForLoading: build.mutation<TransportationOrderResult, number>({
+			query: (id) => ({
+				url: `/inform_arrival_for_loading/${id}`,
+				method: "POST",
+				data: id,
+			}),
+		}),
+		startTransportation: build.mutation<TransportationOrderResult, number>({
+			query: (id) => ({
+				url: `/start_transportation/${id}`,
+				method: "POST",
+				data: id,
+			}),
+		}),
+		informArrivalForUnloading: build.mutation<TransportationOrderResult, number>({
+			query: (id) => ({
+				url: `/inform_arrival_for_unloading/${id}`,
+				method: "POST",
+				data: id,
+			}),
+		}),
+		doneTransportation: build.mutation<TransportationOrderResult, number>({
+			query: (orderId) => ({
+				url: `/done_transportation/${orderId}`,
+				method: "POST",
+			}),
+		}),
 	}),
 });
 
-export const { useGetOrderByIdQuery, useAssignTruckMutation } = ordersApi;
+export const {
+	useGetOrderByIdQuery,
+	useStartShipperApprovingMutation,
+	useAssignTruckMutation,
+	useInformArrivalForLoadingMutation,
+	useStartTransportationMutation,
+	useInformArrivalForUnloadingMutation,
+	useDoneTransportationMutation,
+} = ordersApi;

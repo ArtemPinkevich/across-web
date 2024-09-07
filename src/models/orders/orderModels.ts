@@ -28,7 +28,7 @@ export interface ITransportation {
 	transportationOrderId?: number;
 	transferInfo: ITransferInfo;
 	cargo: ICargo;
-	transportationStatus: TransportationStatus;
+	transportationOrderStatus: TransportationStatus;
 }
 
 export interface ITransferInfo {
@@ -59,6 +59,11 @@ export interface TransportationOrderResult {
 }
 
 export interface IAssignTruckRequest {
+	truckId?: number;
+	transportationOrderId?: number;
+}
+
+export interface IStartShipperApprovingRequest {
 	truckId?: number;
 	transportationOrderId?: number;
 }

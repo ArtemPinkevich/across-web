@@ -5,8 +5,15 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useNavigate, useParams } from "react-router-dom";
 import TransportationGeneralInfo from "../transportations/TransportationGeneralInfo";
 import { orderToOrderDataItemsConverter } from "../transportations/orderToOrderDataItemsConverter";
-import { useAssignTruckMutation } from "../../../store/rtkQuery/ordersApi";
+import {
+	useAssignTruckMutation,
+	useDoneTransportationMutation,
+	useInformArrivalForLoadingMutation,
+	useInformArrivalForUnloadingMutation,
+	useStartTransportationMutation,
+} from "../../../store/rtkQuery/ordersApi";
 import { IAssignTruckRequest, TransportationOrderResult } from "../../../models/orders/orderModels";
+import { TransportationStatus } from "../../../models/orders/TransportationStatus";
 
 const errorComponent = (
 	<Box m="20px">
@@ -26,7 +33,15 @@ const CorrelationAtWork = () => {
 	}
 
 	const { data: response } = useGetOrdersInProgressQuery();
-	const [assignTruck, { isLoading, error }] = useAssignTruckMutation();
+	const [doneTransportation, { isLoading, error }] = useDoneTransportationMutation();
+
+	const [assignTruck, { isLoading: isLoadingAssignTruck, error: errorAassignTruck }] = useAssignTruckMutation();
+	const [informArrivalForLoading, { isLoading: isLoadingForLoading, error: errorForLoading }] =
+		useInformArrivalForLoadingMutation();
+	const [startTransportation, { isLoading: isLoadingStartTransportation, error: errorStartTransportation }] =
+		useStartTransportationMutation();
+	const [informArrivalForUnloading, { isLoading: isLoadingForUnloading, error: errorForUnloading }] =
+		useInformArrivalForUnloadingMutation();
 
 	if (!response || response.result == ApiCommonResult.Error) {
 		return errorComponent;
@@ -68,7 +83,61 @@ const CorrelationAtWork = () => {
 
 	const handleRejectClick = () => {};
 
-	const handleOkClick = async () => {};
+	const handleOkClick = async () => {
+		const currentStatus = correlation.transportationOrder?.transportationOrderStatus;
+		const orderId = correlation.transportationOrder?.transportationOrderId;
+		if (!currentStatus || !orderId) {
+			return;
+		}
+
+		let responce: TransportationOrderResult | undefined = undefined;
+
+		if (currentStatus === TransportationStatus.shipperApproving) {
+			if (correlation?.truck?.truckId === undefined) {
+				return;
+			}
+			const assignTruckRequest: IAssignTruckRequest = {
+				truckId: correlation.truck.truckId,
+				transportationOrderId: orderId,
+			};
+			responce = await assignTruck(assignTruckRequest).unwrap();
+		} else if (currentStatus === TransportationStatus.waitingForLoading) {
+			responce = await informArrivalForLoading(orderId).unwrap();
+		} else if (currentStatus === TransportationStatus.loading) {
+			responce = await startTransportation(orderId).unwrap();
+		} else if (currentStatus === TransportationStatus.transporting) {
+			responce = await informArrivalForUnloading(orderId).unwrap();
+		} else if (currentStatus === TransportationStatus.unloading) {
+			responce = await doneTransportation(orderId).unwrap();
+		}
+
+		if (responce?.result === ApiCommonResult.Ok) {
+			navigate("/");
+		}
+	};
+
+	const getButtonText = () => {
+		const currentStatus = correlation.transportationOrder?.transportationOrderStatus;
+		if (!currentStatus) {
+			return "";
+		}
+
+		switch (currentStatus) {
+			case TransportationStatus.shipperApproving:
+				return "Закрепить груз за водителем";
+			case TransportationStatus.waitingForLoading:
+				return "Прибыл для загрузки";
+			case TransportationStatus.loading:
+				return "В путь";
+			case TransportationStatus.transporting:
+				return "Прибыл для выгрузки";
+			case TransportationStatus.unloading:
+			case TransportationStatus.delivered:
+				return "Завершить перевозку";
+			default:
+				return "OK";
+		}
+	};
 
 	return (
 		<Stack m={2} spacing={3}>
@@ -76,27 +145,33 @@ const CorrelationAtWork = () => {
 				<TransportationGeneralInfo
 					transferInfo={correlation.transportationOrder.transferInfo}
 					cargoName={correlation.transportationOrder.cargo.name}
-					transportationStatus={correlation.transportationOrder.transportationStatus}
+					transportationStatus={correlation.transportationOrder.transportationOrderStatus}
 				/>
 			</Paper>
 
 			<DataGrid rows={dataItems} getRowId={(o) => o.parameterName!} columns={columns} density="compact" hideFooter />
 
-			{isLoading ? (
+			{isLoading ||
+			isLoadingAssignTruck ||
+			isLoadingForLoading ||
+			isLoadingStartTransportation ||
+			isLoadingForUnloading ? (
 				<Box alignSelf={"end"} justifyContent={"right"}>
 					<CircularProgress />
 				</Box>
 			) : (
 				<Stack direction={"row"} spacing={2} justifyContent={"right"}>
-					<Button color="warning" variant="outlined" onClick={handleRejectClick}>
-						???
-					</Button>
+					{correlation.transportationOrder.transportationOrderStatus === TransportationStatus.shipperApproving && (
+						<Button color="warning" variant="outlined" onClick={handleRejectClick}>
+							Отменить согласование
+						</Button>
+					)}
 					<Button color="success" variant="outlined" onClick={handleOkClick}>
-						???
+						{getButtonText()}
 					</Button>
 				</Stack>
 			)}
-			{error && (
+			{(error || errorAassignTruck || errorForLoading || errorStartTransportation || errorForUnloading) && (
 				<Typography mt={1} color={"red"} alignSelf={"end"} justifyContent={"right"}>
 					Не удалось выполнить операцию.
 				</Typography>

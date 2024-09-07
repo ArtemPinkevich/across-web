@@ -32,7 +32,7 @@ const TransportationsTable = (props: Props) => {
 			headerName: "Статус груза",
 			width: 100,
 			renderCell: (params) => {
-				if (params.row.transportationStatus === TransportationStatus.carrierFinding) {
+				if (params.row.transportationOrderStatus === TransportationStatus.carrierFinding) {
 					return <Chip size="small" color={"success"} label={"Свободен"} />;
 				}
 
@@ -40,7 +40,7 @@ const TransportationsTable = (props: Props) => {
 					<Chip
 						size="small"
 						color={"default"}
-						label={TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP.get(params.row.transportationStatus)}
+						label={TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP.get(params.row.transportationOrderStatus)}
 					/>
 				);
 			},

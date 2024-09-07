@@ -5,7 +5,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useNavigate, useParams } from "react-router-dom";
 import TransportationGeneralInfo from "../transportations/TransportationGeneralInfo";
 import { orderToOrderDataItemsConverter } from "../transportations/orderToOrderDataItemsConverter";
-import { useAssignTruckMutation } from "../../../store/rtkQuery/ordersApi";
+import { useStartShipperApprovingMutation } from "../../../store/rtkQuery/ordersApi";
 import { IAssignTruckRequest, TransportationOrderResult } from "../../../models/orders/orderModels";
 
 const errorComponent = (
@@ -26,7 +26,7 @@ const Correlation = () => {
 	}
 
 	const { data: bidsResponse } = useGetBidsQuery();
-	const [assignTruck, { isLoading, error }] = useAssignTruckMutation();
+	const [startShipperApproving, { isLoading, error }] = useStartShipperApprovingMutation();
 
 	if (!bidsResponse || bidsResponse.result == ApiCommonResult.Error) {
 		return errorComponent;
@@ -74,7 +74,7 @@ const Correlation = () => {
 			transportationOrderId: correlation.transportationOrder.transportationOrderId,
 		};
 
-		const responce: TransportationOrderResult = await assignTruck(request).unwrap();
+		const responce: TransportationOrderResult = await startShipperApproving(request).unwrap();
 		if (responce?.result === ApiCommonResult.Ok) {
 			navigate("/");
 		}
@@ -86,7 +86,7 @@ const Correlation = () => {
 				<TransportationGeneralInfo
 					transferInfo={correlation.transportationOrder.transferInfo}
 					cargoName={correlation.transportationOrder.cargo.name}
-					transportationStatus={correlation.transportationOrder.transportationStatus}
+					transportationStatus={correlation.transportationOrder.transportationOrderStatus}
 				/>
 			</Paper>
 
@@ -102,7 +102,7 @@ const Correlation = () => {
 						Отклонить
 					</Button>
 					<Button color="success" variant="outlined" onClick={handleOkClick}>
-						Закрепить груз за водителем
+						Согласовать с отправителем
 					</Button>
 				</Stack>
 			)}

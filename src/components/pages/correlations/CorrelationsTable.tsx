@@ -69,9 +69,9 @@ const CorrelationsTable = (props: Props) => {
 		{
 			field: "status",
 			headerName: "Статус груза",
-			width: 100,
+			width: 150,
 			renderCell: (params) => {
-				if (params.row.transportationOrder.transportationStatus === TransportationStatus.carrierFinding) {
+				if (params.row.transportationOrder.transportationOrderStatus === TransportationStatus.carrierFinding) {
 					return <Chip size="small" color={"success"} label={"Свободен"} />;
 				}
 
@@ -79,7 +79,9 @@ const CorrelationsTable = (props: Props) => {
 					<Chip
 						size="small"
 						color={"default"}
-						label={TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP.get(params.row.transportationOrder.transportationStatus)}
+						label={TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP.get(
+							params.row.transportationOrder.transportationOrderStatus,
+						)}
 					/>
 				);
 			},

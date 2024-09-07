@@ -54,7 +54,7 @@ const TransportationOrderDetails = () => {
 			<TransportationGeneralInfo
 				transferInfo={order.transferInfo}
 				cargoName={order.cargo.name}
-				transportationStatus={order.transportationStatus}
+				transportationStatus={order.transportationOrderStatus}
 			/>
 			<DataGrid
 				rows={dataItems}
