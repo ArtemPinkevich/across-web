@@ -15,7 +15,10 @@ export const getImageFromBackend = async (
 			responseType: "blob",
 		};
 
-		const response = await axios.get(`${BASE_SERVER_URL}/File/get-image/${documentType}/${userId}`, config);
+		const response = await axios.get(
+			`${BASE_SERVER_URL}/File/get-image?documentType=${documentType}&UserId=${userId}`,
+			config,
+		);
 
 		if (response.status) {
 			const base64 = await convertBlobToBase64(response.data);

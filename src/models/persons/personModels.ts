@@ -15,6 +15,7 @@ export enum PersonStatus {
 }
 
 export enum UserDocumentType {
+	AVATAR,
 	PASSPORT_MAIN,
 	PASSPORT_REGISTRATION,
 	DRIVER_LICENSE,
