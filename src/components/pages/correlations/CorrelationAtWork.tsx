@@ -1,5 +1,4 @@
 import { Box, Button, CircularProgress, Paper, Stack, Typography } from "@mui/material";
-import { useGetOrdersInProgressQuery } from "../../../store/rtkQuery/searchApi";
 import { ApiCommonResult } from "../../../models/commonApi";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,12 +7,14 @@ import { orderToOrderDataItemsConverter } from "../transportations/orderToOrderD
 import {
 	useAssignTruckMutation,
 	useDoneTransportationMutation,
+	useGetOrdersInProgressQuery,
 	useInformArrivalForLoadingMutation,
 	useInformArrivalForUnloadingMutation,
 	useStartTransportationMutation,
 } from "../../../store/rtkQuery/ordersApi";
 import { IAssignTruckRequest, TransportationOrderResult } from "../../../models/orders/orderModels";
 import { TransportationStatus } from "../../../models/orders/TransportationStatus";
+import UserQuickInfo from "../counterparties/person/UserQuickInfo";
 
 const errorComponent = (
 	<Box m="20px">
@@ -112,7 +113,7 @@ const CorrelationAtWork = () => {
 		}
 
 		if (responce?.result === ApiCommonResult.Ok) {
-			navigate("/");
+			navigate("/in-progress");
 		}
 	};
 
@@ -148,6 +149,11 @@ const CorrelationAtWork = () => {
 					transportationStatus={correlation.transportationOrder.transportationOrderStatus}
 				/>
 			</Paper>
+
+			<Stack direction={"row"} spacing={2}>
+				<UserQuickInfo person={correlation.shipper} />
+				<UserQuickInfo person={correlation.driver} />
+			</Stack>
 
 			<DataGrid rows={dataItems} getRowId={(o) => o.parameterName!} columns={columns} density="compact" hideFooter />
 

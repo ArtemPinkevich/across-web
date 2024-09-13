@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useGetTruckByIdQuery } from "../../../store/rtkQuery/truckApi";
 import { truckToTruckDataItemsConverter } from "./truckToTruckDataItemsConverter";
 import { useSearchDriverByTruckIdQuery } from "../../../store/rtkQuery/searchApi";
+import UserQuickInfo from "../counterparties/person/UserQuickInfo";
 
 const errorComponent = (
 	<Box m="20px">
@@ -47,6 +48,7 @@ const TruckDetails = () => {
 
 	return (
 		<Stack m={5} spacing={2} letterSpacing={0.3}>
+			{driver && <UserQuickInfo person={driver} />}
 			<DataGrid
 				rows={dataItems}
 				getRowId={(o) => o.parameterName!}
