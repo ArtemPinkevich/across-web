@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { ApiCommonResult } from "../../models/commonApi";
 import CorrelationsTable from "./correlations/CorrelationsTable";
-import { useGetOrdersInProgressQuery } from "../../store/rtkQuery/searchApi";
+import { useGetOrdersInProgressQuery } from "../../store/rtkQuery/ordersApi";
 
 const AtWorkTab = () => {
 	const navigate = useNavigate();

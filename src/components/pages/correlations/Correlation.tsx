@@ -1,11 +1,10 @@
 import { Box, Button, CircularProgress, Paper, Stack, Typography } from "@mui/material";
-import { useGetBidsQuery } from "../../../store/rtkQuery/searchApi";
 import { ApiCommonResult } from "../../../models/commonApi";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useNavigate, useParams } from "react-router-dom";
 import TransportationGeneralInfo from "../transportations/TransportationGeneralInfo";
 import { orderToOrderDataItemsConverter } from "../transportations/orderToOrderDataItemsConverter";
-import { useStartShipperApprovingMutation } from "../../../store/rtkQuery/ordersApi";
+import { useGetBidsQuery, useStartShipperApprovingMutation } from "../../../store/rtkQuery/ordersApi";
 import { IAssignTruckRequest, TransportationOrderResult } from "../../../models/orders/orderModels";
 
 const errorComponent = (

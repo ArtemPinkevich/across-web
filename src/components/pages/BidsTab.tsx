@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
-import { useGetBidsQuery } from "../../store/rtkQuery/searchApi";
 import { ApiCommonResult } from "../../models/commonApi";
 import CorrelationsTable from "./correlations/CorrelationsTable";
+import { useGetBidsQuery } from "../../store/rtkQuery/ordersApi";
 
 const BidsTab = () => {
 	const navigate = useNavigate();

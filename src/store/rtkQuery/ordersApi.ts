@@ -1,9 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_SERVER_URL, JSON_SERVER_URL, USE_FAKE_SERVER } from "../../models/constants";
 import {
+	BidsResponse,
 	IAssignTruckRequest,
 	IStartShipperApprovingRequest,
 	ITransportationResult,
+	OrdersInProgressResponse,
 	TransportationOrderResult,
 } from "../../models/orders/orderModels";
 import { baseQueryWithToken } from "./baseQueryWithReauth";
@@ -13,8 +15,16 @@ export const ordersApi = createApi({
 	baseQuery: USE_FAKE_SERVER
 		? fetchBaseQuery({ baseUrl: JSON_SERVER_URL })
 		: baseQueryWithToken(`${BASE_SERVER_URL}/TransportationOrder`),
+	tagTypes: ["OrdersInProgress"],
 	refetchOnMountOrArgChange: true,
 	endpoints: (build) => ({
+		getOrdersInProgress: build.query<OrdersInProgressResponse, void>({
+			query: () => ({ url: `/get_orders_in_progress` }),
+			providesTags: ["OrdersInProgress"],
+		}),
+		getBids: build.query<BidsResponse, void>({
+			query: () => ({ url: `/get_bids` }),
+		}),
 		getOrderById: build.query<ITransportationResult, number>({
 			query: (orderId) => ({
 				url: `/get_order_by_id/${orderId}`,
@@ -26,6 +36,7 @@ export const ordersApi = createApi({
 				method: "POST",
 				body,
 			}),
+			invalidatesTags: ["OrdersInProgress"],
 		}),
 		assignTruck: build.mutation<TransportationOrderResult, IAssignTruckRequest>({
 			query: (body) => ({
@@ -33,6 +44,7 @@ export const ordersApi = createApi({
 				method: "POST",
 				body,
 			}),
+			invalidatesTags: ["OrdersInProgress"],
 		}),
 		informArrivalForLoading: build.mutation<TransportationOrderResult, number>({
 			query: (id) => ({
@@ -40,6 +52,7 @@ export const ordersApi = createApi({
 				method: "POST",
 				data: id,
 			}),
+			invalidatesTags: ["OrdersInProgress"],
 		}),
 		startTransportation: build.mutation<TransportationOrderResult, number>({
 			query: (id) => ({
@@ -47,6 +60,7 @@ export const ordersApi = createApi({
 				method: "POST",
 				data: id,
 			}),
+			invalidatesTags: ["OrdersInProgress"],
 		}),
 		informArrivalForUnloading: build.mutation<TransportationOrderResult, number>({
 			query: (id) => ({
@@ -54,17 +68,21 @@ export const ordersApi = createApi({
 				method: "POST",
 				data: id,
 			}),
+			invalidatesTags: ["OrdersInProgress"],
 		}),
 		doneTransportation: build.mutation<TransportationOrderResult, number>({
 			query: (orderId) => ({
 				url: `/done_transportation/${orderId}`,
 				method: "POST",
 			}),
+			invalidatesTags: ["OrdersInProgress"],
 		}),
 	}),
 });
 
 export const {
+	useGetOrdersInProgressQuery,
+	useGetBidsQuery,
 	useGetOrderByIdQuery,
 	useStartShipperApprovingMutation,
 	useAssignTruckMutation,

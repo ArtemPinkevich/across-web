@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
-import { useGetBidsQuery } from "../../store/rtkQuery/searchApi";
 import { ApiCommonResult } from "../../models/commonApi";
 import CorrelationsTable from "./correlations/CorrelationsTable";
+import { useGetBidsQuery } from "../../store/rtkQuery/ordersApi";
 
 const MatchesTab = () => {
 	const { data: bidsResponse } = useGetBidsQuery();
@@ -20,9 +20,7 @@ const MatchesTab = () => {
 
 	return (
 		<Box m="20px">
-			{correlations?.length > 0 ? (
-				<CorrelationsTable correlations={correlations} />
-			) : (
+			{correlations?.length > 0 ? null : ( // <CorrelationsTable correlations={correlations} />
 				<Typography>Подходящих перевозок не найдено</Typography>
 			)}
 		</Box>

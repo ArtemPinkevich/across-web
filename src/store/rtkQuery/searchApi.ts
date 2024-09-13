@@ -3,7 +3,6 @@ import { BASE_SERVER_URL, JSON_SERVER_URL, USE_FAKE_SERVER } from "../../models/
 import { SearchRequest, SearchResponse, SearchTrucksResponse } from "../../models/search/Search";
 import { IProfile } from "../../models/persons/personModels";
 import { baseQueryWithToken } from "./baseQueryWithReauth";
-import { BidsResponse, OrdersInProgressResponse } from "../../models/orders/orderModels";
 
 export const searchApi = createApi({
 	reducerPath: "searchApi",
@@ -11,14 +10,6 @@ export const searchApi = createApi({
 		? fetchBaseQuery({ baseUrl: JSON_SERVER_URL })
 		: baseQueryWithToken(`${BASE_SERVER_URL}/Search`),
 	endpoints: (build) => ({
-		getBids: build.query<BidsResponse, void>({
-			query: () => ({ url: `/get_bids` }),
-		}),
-
-		getOrdersInProgress: build.query<OrdersInProgressResponse, void>({
-			query: () => ({ url: `/search_orders_in_progress` }),
-		}),
-
 		searchTransportations: build.query<SearchResponse, SearchRequest>({
 			query: (searchRequest) => ({
 				url: `/search?FromAddress=${searchRequest.fromAddress}&ToAddress=${searchRequest.toAddress}&LoadingDate=${encodeURIComponent(
@@ -47,10 +38,8 @@ export const searchApi = createApi({
 });
 
 export const {
-	useGetBidsQuery,
 	useLazySearchTransportationsQuery,
 	useLazySearchTrucksQuery,
 	useSearchShipperByOrderIdQuery,
 	useSearchDriverByTruckIdQuery,
-	useGetOrdersInProgressQuery,
 } = searchApi;
