@@ -6,7 +6,10 @@ import { useGetBidsQuery } from "../../store/rtkQuery/ordersApi";
 
 const BidsTab = () => {
 	const navigate = useNavigate();
-	const { data: bidsResponse } = useGetBidsQuery();
+	const { data: bidsResponse } = useGetBidsQuery(undefined, {
+		pollingInterval: 10000,
+		skipPollingIfUnfocused: true,
+	});
 
 	if (!bidsResponse || bidsResponse.result == ApiCommonResult.Error) {
 		return (

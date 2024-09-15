@@ -6,7 +6,10 @@ import { useGetOrdersInProgressQuery } from "../../store/rtkQuery/ordersApi";
 
 const AtWorkTab = () => {
 	const navigate = useNavigate();
-	const { data: response } = useGetOrdersInProgressQuery();
+	const { data: response } = useGetOrdersInProgressQuery(undefined, {
+		pollingInterval: 10000,
+		skipPollingIfUnfocused: true,
+	});
 
 	if (!response || response.result === ApiCommonResult.Error) {
 		return (
