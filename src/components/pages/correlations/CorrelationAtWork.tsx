@@ -108,7 +108,7 @@ const CorrelationAtWork = () => {
 			responce = await startTransportation(orderId).unwrap();
 		} else if (currentStatus === TransportationStatus.transporting) {
 			responce = await informArrivalForUnloading(orderId).unwrap();
-		} else if (currentStatus === TransportationStatus.unloading) {
+		} else if (currentStatus === TransportationStatus.unloading || currentStatus === TransportationStatus.delivered) {
 			responce = await doneTransportation(orderId).unwrap();
 		}
 
