@@ -5,7 +5,7 @@ export const TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP = new Map<Object, string>
 	[TransportationStatus.carrierFinding, "Поиск перевозчика"],
 	[TransportationStatus.managerApproving, "на рассмотрении"],
 	[TransportationStatus.shipperApproving, "Согласовании с отправителем"],
-	[TransportationStatus.waitingForLoading, "Ожидание загрузки"],
+	[TransportationStatus.waitingForLoading, "В пути на загрузку"],
 	[TransportationStatus.loading, "Загрузка"],
 	[TransportationStatus.transporting, "В дороге"],
 	[TransportationStatus.unloading, "Выгрузка"],
