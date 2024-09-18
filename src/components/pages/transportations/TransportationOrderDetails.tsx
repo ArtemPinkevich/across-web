@@ -51,11 +51,7 @@ const TransportationOrderDetails = () => {
 
 	return (
 		<Stack m={5} spacing={2} letterSpacing={0.3}>
-			<TransportationGeneralInfo
-				transferInfo={order.transferInfo}
-				cargoName={order.cargo.name}
-				transportationStatus={order.transportationOrderStatus}
-			/>
+			<TransportationGeneralInfo transportation={order} />
 			<DataGrid
 				rows={dataItems}
 				getRowId={(o) => o.parameterName!}

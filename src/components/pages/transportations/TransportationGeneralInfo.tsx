@@ -1,19 +1,24 @@
 import { Box, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { placeToDisplayStringConverter } from "../../../models/places/PlaceToDisplayStringConverter";
-import { ITransferInfo } from "../../../models/orders/orderModels";
-import { TransportationStatus } from "../../../models/orders/TransportationStatus";
+import { ITransportation } from "../../../models/orders/orderModels";
 import { TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP } from "../../../models/orders/TransportationStatusToDisplayNameMap";
 import moment from "moment";
 
 export type Props = {
-	transferInfo: ITransferInfo;
-	cargoName: string;
-	transportationStatus: TransportationStatus;
+	transportation: ITransportation;
 };
 
 const TransportationGeneralInfo = (props: Props) => {
-	let { transferInfo, cargoName, transportationStatus } = props;
+	let { transportation } = props;
+
+	if (!transportation) {
+		return null;
+	}
+
+	const transferInfo = transportation.transferInfo;
+	const cargoName = transportation.cargo.name;
+	const transportationStatus = transportation.transportationOrderStatus;
 
 	let displyLoadingDate = transferInfo.loadingDateFrom
 		? moment(transferInfo.loadingDateFrom).format("DD.MM.YYYY")
@@ -48,25 +53,26 @@ const TransportationGeneralInfo = (props: Props) => {
 
 	const rows = [
 		{ id: 1, parameterName: "Название", parameterValue: cargoName },
+		{ id: 2, parameterName: "Ставка", parameterValue: `${transportation.price}, ₸` },
 		{
-			id: 2,
+			id: 3,
 			parameterName: "Город загрузки",
 			parameterValue: placeToDisplayStringConverter(transferInfo.loadingPlace),
 		},
-		{ id: 3, parameterName: "Адрес загрузки", parameterValue: transferInfo.loadingAddress },
+		{ id: 4, parameterName: "Адрес загрузки", parameterValue: transferInfo.loadingAddress },
 		{
-			id: 4,
+			id: 5,
 			parameterName: "Дата загрузки",
 			parameterValue: displyLoadingDate,
 		},
 		{
-			id: 5,
+			id: 6,
 			parameterName: "Город выгрузки",
 			parameterValue: placeToDisplayStringConverter(transferInfo.unloadingPlace),
 		},
-		{ id: 6, parameterName: "Адрес выгрузки", parameterValue: transferInfo.unloadingAddress },
+		{ id: 7, parameterName: "Адрес выгрузки", parameterValue: transferInfo.unloadingAddress },
 		{
-			id: 7,
+			id: 8,
 			parameterName: "Статус груза",
 			parameterValue: TRANSPORTATION_STATUS_TO_DISPLAY_NAME_MAP.get(transportationStatus)?.toUpperCase(),
 		},

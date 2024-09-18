@@ -82,11 +82,7 @@ const Correlation = () => {
 	return (
 		<Stack m={2} spacing={3}>
 			<Paper elevation={3} sx={{ p: 3 }}>
-				<TransportationGeneralInfo
-					transferInfo={correlation.transportationOrder.transferInfo}
-					cargoName={correlation.transportationOrder.cargo.name}
-					transportationStatus={correlation.transportationOrder.transportationOrderStatus}
-				/>
+				<TransportationGeneralInfo transportation={correlation.transportationOrder} />
 			</Paper>
 
 			<DataGrid rows={dataItems} getRowId={(o) => o.parameterName!} columns={columns} density="compact" hideFooter />
