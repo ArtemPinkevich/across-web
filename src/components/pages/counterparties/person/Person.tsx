@@ -22,6 +22,7 @@ import {
 } from "../../../../models/persons/personModels";
 import { useChangePersonStatusMutation } from "../../../../store/rtkQuery/personsApi";
 import { useState } from "react";
+import TrucksPhotos from "./TrucksPhotos";
 
 const Person = ({ person }: { person: IProfile | null | undefined }) => {
 	const intl = useIntl();
@@ -111,6 +112,15 @@ const Person = ({ person }: { person: IProfile | null | undefined }) => {
 				</Typography>
 				<Documents documents={person.documentDtos ?? []} person={person} />
 			</Paper>
+
+			{person.role === PersonRole.DRIVER && (
+				<Paper elevation={3} sx={{ m: 3, p: 3 }}>
+					<Typography variant="h3" color={"GrayText"} fontFamily={"monospace"}>
+						Грузовики
+					</Typography>
+					<TrucksPhotos person={person} />
+				</Paper>
+			)}
 
 			<Dialog fullWidth open={approveDialogOpen} onClose={() => setApproveDialogOpen(false)}>
 				<DialogContent>

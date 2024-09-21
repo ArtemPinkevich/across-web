@@ -21,13 +21,13 @@ import {
 	IProfile,
 	IUserDocument,
 	UserDocumentStatus,
-	UserDocumentType,
+	UserContentType,
 } from "../../../../models/persons/personModels";
 import {
 	documentStatusToDisplayStringConverter,
 	documentTypeToDisplayStringConverter,
 } from "../../../../models/persons/documentConverters";
-import { getImageFromBackend } from "../../../../services/ImageHelper";
+import { getUserContentFromBackend } from "../../../../services/ImageHelper";
 import { useChangeDocStatusMutation } from "../../../../store/rtkQuery/personsApi";
 
 export type DocsProps = {
@@ -44,7 +44,7 @@ const Documents = (props: DocsProps) => {
 	const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
 	const [fullscreenDocumentTitle, setFullscreenDocumentTitle] = useState("");
 	const [fullscreenDocument, setFullscreenDocument] = useState<IUserDocument>();
-	const [documentImagesMap, setDocumentImagesMap] = useState<Map<UserDocumentType, string>>(new Map());
+	const [documentImagesMap, setDocumentImagesMap] = useState<Map<UserContentType, string>>(new Map());
 
 	const [changeDocStatus] = useChangeDocStatusMutation();
 
@@ -57,7 +57,7 @@ const Documents = (props: DocsProps) => {
 			(document?.documentType || document?.documentType === 0) &&
 			document.documentStatus != UserDocumentStatus.NONE
 		) {
-			const base64 = await getImageFromBackend(document.documentType, person.id);
+			const base64 = await getUserContentFromBackend(document.documentType, person.id);
 			if (base64) {
 				setDocumentImagesMap((prev) => new Map(prev.set(document.documentType, base64)));
 			}

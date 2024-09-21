@@ -52,3 +52,8 @@ export interface ITrucksListResultDto {
 	result: ITruckResultDto;
 	trucks: ITruck[];
 }
+
+export interface ITrucksListResultDto {
+	result: ITruckResultDto;
+	trucks: ITruck[];
+}

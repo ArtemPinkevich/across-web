@@ -1,7 +1,7 @@
 import { Avatar, Box, Card, CardContent, Chip, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { IProfile, PersonRole, PersonStatus, UserDocumentType } from "../../../../models/persons/personModels";
-import { getImageFromBackend } from "../../../../services/ImageHelper";
+import { IProfile, PersonRole, PersonStatus, UserContentType } from "../../../../models/persons/personModels";
+import { getUserContentFromBackend } from "../../../../services/ImageHelper";
 
 export type DocsProps = {
 	person: IProfile;
@@ -12,11 +12,11 @@ const UserQuickInfo = (props: DocsProps) => {
 	const [base64FromServer, setBase64FromServer] = useState<string>();
 
 	useEffect(() => {
-		getImageFromBackendAsync(UserDocumentType.AVATAR);
+		getImageFromBackendAsync(UserContentType.AVATAR);
 	}, []);
 
-	const getImageFromBackendAsync = async (docType: UserDocumentType) => {
-		const base64 = await getImageFromBackend(docType, person.id);
+	const getImageFromBackendAsync = async (docType: UserContentType) => {
+		const base64 = await getUserContentFromBackend(docType, person.id);
 		setBase64FromServer(base64);
 	};
 

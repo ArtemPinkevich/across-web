@@ -1,11 +1,12 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { BASE_SERVER_URL } from "../models/constants";
-import { UserDocumentType } from "../models/persons/personModels";
+import { UserContentType } from "../models/persons/personModels";
 import { getFromLocalStorage, LocalStorageKeys } from "./LocalStorageService";
 
-export const getImageFromBackend = async (
-	documentType: UserDocumentType,
+export const getUserContentFromBackend = async (
+	documentType: UserContentType,
 	userId: string,
+	sectionKey?: string,
 ): Promise<string | undefined> => {
 	try {
 		const accessToken = await getFromLocalStorage(LocalStorageKeys.accessToken);
@@ -16,7 +17,7 @@ export const getImageFromBackend = async (
 		};
 
 		const response = await axios.get(
-			`${BASE_SERVER_URL}/File/get-image?documentType=${documentType}&UserId=${userId}`,
+			`${BASE_SERVER_URL}/File/get-user-content?documentType=${documentType}&UserId=${userId}&SectionKey=${sectionKey ?? ""}`,
 			config,
 		);
 
