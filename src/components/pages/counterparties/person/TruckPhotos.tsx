@@ -41,25 +41,33 @@ const TruckPhotos = (props: DocsProps) => {
 			{frontTruckPhoto ? (
 				<Box component="img" sx={{ maxWidth: { xs: 300, sm: 400, md: 500 } }} src={frontTruckPhoto} />
 			) : (
-				<Typography fontSize={12}>Фото слева не загружено</Typography>
+				<Typography fontSize={12} color={"red"}>
+					Фото спереди отсутствует
+				</Typography>
 			)}
 
 			{backTruckPhoto ? (
 				<Box component="img" sx={{ maxWidth: { xs: 300, sm: 400, md: 500 } }} src={backTruckPhoto} />
 			) : (
-				<Typography fontSize={12}>Фото слева не загружено</Typography>
+				<Typography fontSize={12} color={"red"}>
+					Фото сзади отсутствует
+				</Typography>
 			)}
 
 			{leftTruckPhoto ? (
 				<Box component="img" sx={{ maxWidth: { xs: 300, sm: 400, md: 500 } }} src={leftTruckPhoto} />
 			) : (
-				<Typography fontSize={12}>Фото слева не загружено</Typography>
+				<Typography fontSize={12} color={"red"}>
+					Фото слева отсутствует
+				</Typography>
 			)}
 
 			{rightTruckPhoto ? (
 				<Box component="img" sx={{ maxWidth: { xs: 300, sm: 400, md: 500 } }} src={rightTruckPhoto} />
 			) : (
-				<Typography fontSize={12}>Фото справа не загружено</Typography>
+				<Typography fontSize={12} color={"red"}>
+					Фото справа отсутствует
+				</Typography>
 			)}
 		</Stack>
 	);
