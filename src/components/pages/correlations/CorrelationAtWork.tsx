@@ -15,6 +15,8 @@ import {
 import { IAssignTruckRequest, TransportationOrderResult } from "../../../models/orders/orderModels";
 import { TransportationStatus } from "../../../models/orders/TransportationStatus";
 import UserQuickInfo from "../counterparties/person/UserQuickInfo";
+import { useState } from "react";
+import ClarifyCorrelationModal from "./ClarifyCorrelationModal";
 
 const errorComponent = (
 	<Box m="20px">
@@ -32,6 +34,8 @@ const CorrelationAtWork = () => {
 	if (!paramId) {
 		return errorComponent;
 	}
+
+	const [isClarifyOpen, setIsClarifyOpen] = useState(false);
 
 	const { data: response } = useGetOrdersInProgressQuery();
 	const [doneTransportation, { isLoading, error }] = useDoneTransportationMutation();
@@ -168,6 +172,9 @@ const CorrelationAtWork = () => {
 							Отменить согласование
 						</Button>
 					)}
+					<Button color="info" variant="outlined" onClick={() => setIsClarifyOpen(true)}>
+						Уточнить информацию
+					</Button>
 					<Button color="success" variant="outlined" onClick={handleOkClick}>
 						{getButtonText()}
 					</Button>
@@ -177,6 +184,14 @@ const CorrelationAtWork = () => {
 				<Typography mt={1} color={"red"} alignSelf={"end"} justifyContent={"right"}>
 					Не удалось выполнить операцию.
 				</Typography>
+			)}
+
+			{correlation.transportationOrder.transportationOrderId && (
+				<ClarifyCorrelationModal
+					orderId={correlation.transportationOrder.transportationOrderId}
+					isOpen={isClarifyOpen}
+					onClose={() => setIsClarifyOpen(false)}
+				/>
 			)}
 		</Stack>
 	);

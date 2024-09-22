@@ -33,19 +33,20 @@ export interface ITransportation {
 }
 
 export interface ITransferInfo {
-	loadingDateFrom: string; // Строка формата DateOnly, например "30.01.2022"
+	loadingDateFrom: string;
 	loadingDateTo: string;
-	// LoadingTimeFrom: string;            // Строка формата TimeOnly, например "08:00"
-	// LoadingTimeTo: string;
 	loadingPlace: IPlace;
 	loadingAddress: string;
-
 	unloadingPlace: IPlace;
 	unloadingAddress: string;
-	// unloadingDateFrom: string;            // Строка формата DateOnly, например "30.01.2022"
-	// unloadingDateTo: string;
-	// UnloadingTimeFrom: string;            // Строка формата TimeOnly, например "08:00"
-	// UnloadingTimeTo: string;
+}
+
+export interface IClarifiableTransferInfo {
+	loadingTime: string;
+	loadingContactPerson: string;
+	loadingContactPhone: string;
+	unloadingContactPerson: string;
+	unloadingContactPhone: string;
 }
 
 export interface ITransportationResult {
@@ -67,4 +68,8 @@ export interface IAssignTruckRequest {
 export interface IStartShipperApprovingRequest {
 	truckId?: number;
 	transportationOrderId?: number;
+}
+
+export interface IClarifyRequest extends IClarifiableTransferInfo {
+	transportationOrderId: number;
 }

@@ -3,6 +3,7 @@ import { BASE_SERVER_URL, JSON_SERVER_URL, USE_FAKE_SERVER } from "../../models/
 import {
 	BidsResponse,
 	IAssignTruckRequest,
+	IClarifyRequest,
 	IStartShipperApprovingRequest,
 	ITransportationResult,
 	OrdersInProgressResponse,
@@ -77,6 +78,14 @@ export const ordersApi = createApi({
 			}),
 			invalidatesTags: ["OrdersInProgress"],
 		}),
+		clarify: build.mutation<TransportationOrderResult, IClarifyRequest>({
+			query: (body) => ({
+				url: "/clarify",
+				method: "POST",
+				body,
+			}),
+			invalidatesTags: ["OrdersInProgress"],
+		}),
 	}),
 });
 
@@ -90,4 +99,5 @@ export const {
 	useStartTransportationMutation,
 	useInformArrivalForUnloadingMutation,
 	useDoneTransportationMutation,
+	useClarifyMutation,
 } = ordersApi;
