@@ -4,7 +4,7 @@ import { UserContentType } from "../models/persons/personModels";
 import { getFromLocalStorage, LocalStorageKeys } from "./LocalStorageService";
 
 export const getUserContentFromBackend = async (
-	documentType: UserContentType,
+	userContentType: UserContentType,
 	userId: string,
 	sectionKey?: string,
 ): Promise<string | undefined> => {
@@ -17,7 +17,7 @@ export const getUserContentFromBackend = async (
 		};
 
 		const response = await axios.get(
-			`${BASE_SERVER_URL}/File/get-user-content?documentType=${documentType}&UserId=${userId}&SectionKey=${sectionKey ?? ""}`,
+			`${BASE_SERVER_URL}/File/get-user-content?ContentType=${userContentType}&UserId=${userId}&SectionKey=${sectionKey ?? ""}`,
 			config,
 		);
 

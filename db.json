@@ -13,22 +13,22 @@
 			"documentDtos": [
 				{
 					"documentStatus": 0,
-					"documentType": 0,
+					"userContentType": 0,
 					"comment": ""
 				},
 				{
 					"documentStatus": 0,
-					"documentType": 1,
+					"userContentType": 1,
 					"comment": ""
 				},
 				{
 					"documentStatus": 0,
-					"documentType": 2,
+					"userContentType": 2,
 					"comment": ""
 				},
 				{
 					"documentStatus": 0,
-					"documentType": 2,
+					"userContentType": 2,
 					"comment": ""
 				}
 			]
@@ -58,22 +58,22 @@
 			"documentDtos": [
 				{
 					"documentStatus": 2,
-					"documentType": 0,
+					"userContentType": 0,
 					"comment": ""
 				},
 				{
 					"documentStatus": 2,
-					"documentType": 1,
+					"userContentType": 1,
 					"comment": ""
 				},
 				{
 					"documentStatus": 2,
-					"documentType": 2,
+					"userContentType": 2,
 					"comment": ""
 				},
 				{
 					"documentStatus": 2,
-					"documentType": 2,
+					"userContentType": 2,
 					"comment": ""
 				}
 			]
@@ -91,22 +91,22 @@
 			"documentDtos": [
 				{
 					"documentStatus": 0,
-					"documentType": 0,
+					"userContentType": 0,
 					"comment": ""
 				},
 				{
 					"documentStatus": 1,
-					"documentType": 1,
+					"userContentType": 1,
 					"comment": ""
 				},
 				{
 					"documentStatus": 2,
-					"documentType": 2,
+					"userContentType": 2,
 					"comment": ""
 				},
 				{
 					"documentStatus": 3,
-					"documentType": 3,
+					"userContentType": 3,
 					"comment": "Неразборчивое фото"
 				}
 			]
@@ -197,22 +197,22 @@
 					"documentDtos": [
 						{
 							"documentStatus": 2,
-							"documentType": 0,
+							"userContentType": 0,
 							"comment": ""
 						},
 						{
 							"documentStatus": 2,
-							"documentType": 1,
+							"userContentType": 1,
 							"comment": ""
 						},
 						{
 							"documentStatus": 2,
-							"documentType": 2,
+							"userContentType": 2,
 							"comment": ""
 						},
 						{
 							"documentStatus": 2,
-							"documentType": 2,
+							"userContentType": 2,
 							"comment": ""
 						}
 					]

@@ -25,7 +25,7 @@ import {
 } from "../../../../models/persons/personModels";
 import {
 	documentStatusToDisplayStringConverter,
-	documentTypeToDisplayStringConverter,
+	userContentTypeToDisplayStringConverter,
 } from "../../../../models/persons/documentConverters";
 import { getUserContentFromBackend } from "../../../../services/ImageHelper";
 import { useChangeDocStatusMutation } from "../../../../store/rtkQuery/personsApi";
@@ -66,7 +66,7 @@ const Documents = (props: DocsProps) => {
 
 	const handleDocumentImageClick = (document: IUserDocument) => {
 		setFullscreenDocument(document);
-		setFullscreenDocumentTitle(documentTypeToDisplayStringConverter(document.documentType));
+		setFullscreenDocumentTitle(userContentTypeToDisplayStringConverter(document.documentType));
 		setDocumentDialogOpen(true);
 	};
 
@@ -112,7 +112,7 @@ const Documents = (props: DocsProps) => {
 			{documents.map((document) => (
 				<Accordion key={document.documentType}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
-						{documentTypeToDisplayStringConverter(document.documentType)}
+						{userContentTypeToDisplayStringConverter(document.documentType)}
 						<Box ml={1} display="flex" alignItems="center" justifyContent="center">
 							<Typography
 								fontSize={12}
