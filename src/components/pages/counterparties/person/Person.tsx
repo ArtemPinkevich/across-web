@@ -1,17 +1,14 @@
 import {
 	Box,
 	Button,
-	Chip,
 	Dialog,
 	DialogActions,
 	DialogContent,
 	DialogContentText,
-	Divider,
 	Paper,
 	Stack,
 	Typography,
 } from "@mui/material";
-import { useIntl } from "react-intl";
 import Documents from "./Documents";
 import {
 	IChangePersonStatusRequest,
@@ -23,10 +20,9 @@ import {
 import { useChangePersonStatusMutation } from "../../../../store/rtkQuery/personsApi";
 import { useState } from "react";
 import TrucksPhotos from "./TrucksPhotos";
+import UserQuickInfo from "./UserQuickInfo";
 
 const Person = ({ person }: { person: IProfile | null | undefined }) => {
-	const intl = useIntl();
-
 	if (!person) {
 		return <Box />;
 	}
@@ -72,26 +68,15 @@ const Person = ({ person }: { person: IProfile | null | undefined }) => {
 	return (
 		<Box maxWidth={800}>
 			<Paper elevation={3} sx={{ m: 3, p: 3 }}>
-				<Typography variant="h3" color={"GrayText"} fontFamily={"monospace"}>
+				<Typography mb={3} variant="h3" color={"GrayText"} fontFamily={"monospace"}>
 					Персональная информация
 				</Typography>
+
+				<Box ml={3}>
+					<UserQuickInfo person={person} />
+				</Box>
+
 				<Stack mt={2} mx={2} spacing={1}>
-					<Typography variant="h5">
-						{`${person.surname ?? ""} ${person.name ?? ""} ${person.patronymic ?? ""}`}
-					</Typography>
-					<Typography variant="h5">{`${person.role === PersonRole.SHIPPER ? "Грузоотправитель" : "Перевозчик"}`}</Typography>
-					<Typography variant="h5">{person.phoneNumber}</Typography>
-					<Stack direction={"row"} spacing={2}>
-						<Typography variant="h5">Статус:</Typography>
-						<Chip
-							size="small"
-							color={person.status === PersonStatus.CONFIRMED ? "success" : "error"}
-							label={intl.formatMessage({
-								id: person.status === PersonStatus.CONFIRMED ? "confirmed" : "notConfirmed",
-							})}
-						/>
-					</Stack>
-					<Divider />
 					<Box pt={1} alignSelf={"end"}>
 						{person.status === PersonStatus.CONFIRMED ? (
 							<Button color="warning" size="small" onClick={() => setRevokeDialogOpen(true)}>
